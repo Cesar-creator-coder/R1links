@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <!-- Linhas de conexão do instalador PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+      }
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R1AMOBI - Conectando Destinos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- PERSISTÊNCIA TOTAL: VISUAL ORIGINAL R1AMOBI --- */
+        #bg-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; background: radial-gradient(circle at center, #0a0a0a 0%, #000000 100%);
+        }
+
+        body {
+            margin: 0; color: #ffffff; font-family: 'Segoe UI', Roboto, sans-serif;
+            padding: 40px 20px 140px 20px; display: flex; flex-direction: column; align-items: center; overflow-x: hidden;
+        }
+
+        .profile-container { text-align: center; margin-bottom: 20px; }
+        .profile-img {
+            width: 125px; height: 125px; border-radius: 50%;
+            border: 3px solid #ff0000; box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+            object-fit: cover; margin-bottom: 15px; background: #000;
+        }
+
+        h1 { font-size: 1.6rem; letter-spacing: 3px; text-transform: uppercase; margin: 0; }
+        .brand-r1 { color: #ff0000; text-shadow: 0 0 10px #ff0000; font-weight: 900; }
+        .brand-amobi { color: #ffffff; text-shadow: 0 0 10px #ffffff; font-weight: 300; }
+        .tagline { font-size: 0.9rem; color: #ccc; margin-top: 5px; letter-spacing: 1px; }
+        .category-text { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #777; margin-bottom: 15px; font-weight: bold; }
+
+        .banner-amobi {
+            width: 100%; max-width: 380px; border-radius: 12px; margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); border: 1px solid #333;
+        }
+
+        .links-wrapper { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 15px; }
+
+        .btn-link {
+            text-decoration: none; padding: 16px; border-radius: 50px;
+            font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 15px;
+            transition: all 0.4s ease; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
+            border: 2px solid transparent; cursor: pointer; color: white;
+        }
+
+        /* --- CORES NEON ORIGINAIS --- */
+        .btn-google-play { color: #00f2ff; border-color: #00f2ff; box-shadow: 0 0 10px rgba(0, 242, 255, 0.3); }
+        .btn-google-play:hover { background: #00f2ff; color: #000; box-shadow: 0 0 30px #00f2ff; }
+        
+        .btn-whatsapp { color: #25d366; border-color: #25d366; box-shadow: 0 0 10px rgba(37, 211, 102, 0.3); }
+        .btn-whatsapp:hover { background: #25d366; color: #000; box-shadow: 0 0 30px #25d366; }
+        
+        .btn-calc { color: #ffea00; border-color: #ffea00; box-shadow: 0 0 10px rgba(255, 234, 0, 0.3); }
+        .btn-calc:hover { background: #ffea00; color: #000; box-shadow: 0 0 30px #ffea00; }
+        
+        .btn-instagram { color: #ff007f; border-color: #ff007f; }
+        .btn-instagram:hover { background: #ff007f; color: #fff; box-shadow: 0 0 30px #ff007f; }
+        
+        .btn-facebook { color: #1877F2; border-color: #1877F2; }
+        .btn-facebook:hover { background: #1877F2; color: #fff; box-shadow: 0 0 30px #1877F2; }
+        
+        .btn-play { color: #bf00ff; border-color: #bf00ff; box-shadow: 0 0 10px rgba(191, 0, 255, 0.3); }
+        .btn-play:hover { background: #bf00ff; color: #fff; box-shadow: 0 0 30px #bf00ff; }
+
+        /* --- DESIGN DO ORÇAMENTO PARTICULAR --- */
+        #calc-box {
+            display: none; width: 100%; background: rgba(10, 10, 10, 0.95);
+            border: 1px solid #ffea00; border-radius: 20px; padding: 20px; margin-top: -10px; margin-bottom: 15px; box-sizing: border-box;
+        }
+        
+        .custom-selector { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 12px; }
+        .select-option {
+            background: #111; border: 1px solid #333; padding: 12px; border-radius: 12px;
+            cursor: pointer; font-size: 0.8rem; text-align: left; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 4px;
+        }
+        .select-option.selected { border-color: #ffea00; background: rgba(255, 234, 0, 0.05); box-shadow: 0 0 8px rgba(255, 234, 0, 0.2); }
+        .select-option i { color: #ffea00; font-size: 1.1rem; margin-right: 5px; }
+        .option-header { display: flex; width: 100%; justify-content: space-between; align-items: center; }
+
+        .input-group { margin-bottom: 12px; }
+        .input-group label { display: block; font-size: 9px; color: #ffea00; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 1px; font-weight: bold; }
+        .input-group input { width: 100%; background: #1a1a1a; border: 1px solid #333; padding: 12px; color: white; border-radius: 10px; font-size: 13px; box-sizing: border-box; }
+        .input-group input:focus { border-color: #ffea00; outline: none; }
+
+        .pix-box { display: none; background: #111; border: 1px dashed #25d366; padding: 12px; border-radius: 10px; margin-bottom: 12px; text-align: center; }
+        .btn-copy-pix { background: #25d366; color: #000; border: none; padding: 6px 12px; font-weight: bold; font-size: 10px; border-radius: 5px; cursor: pointer; margin-top: 8px; text-transform: uppercase; }
+
+        #obs-pagamento { font-size: 10px; color: #ff0000; font-weight: bold; text-align: center; margin: 10px 0; display: block; }
+        #video-player { display: none; margin-top: 10px; width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #bf00ff; }
+        .footer { margin-top: 50px; font-size: 0.8rem; color: #888; text-align: center; line-height: 1.5; letter-spacing: 1px; }
+
+        /* --- BANNER ADSENSE DO RODAPÉ (CARROSSEL ATIVO) --- */
+        .adsense-footer {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 70px;
+            background: #fff159; display: flex; align-items: center; justify-content: center;
+            z-index: 1000; text-decoration: none; border-top: 2px solid #333; box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+        }
+        .ads-content {
+            display: flex; align-items: center; gap: 15px; padding: 0 20px; width: 100%; max-width: 420px; color: #333;
+        }
+        .ads-content i { font-size: 22px; color: #3483fa; }
+        
+        .carousel-text {
+            flex-grow: 1; position: relative; height: 35px; overflow: hidden;
+        }
+        .carousel-item {
+            position: absolute; width: 100%; height: 100%; display: flex;
+            align-items: center; font-weight: bold; font-size: 0.82rem; color: #333;
+            opacity: 0; transform: translateY(20px); transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .carousel-item.active { opacity: 1; transform: translateY(0); }
+
+        .btn-ads {
+            background: #3483fa; color: white; padding: 8px 12px; border-radius: 5px;
+            font-size: 0.7rem; font-weight: bold; text-transform: uppercase; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="profile-container">
+        <img src="https://i.postimg.cc/rpmHFjBL/file-0000000067d8720e8c1a5a8dc1ba4445-2.jpg" alt="R1AMOBI" class="profile-img">
+        <h1><span class="brand-r1">R1</span><span class="brand-amobi">AMOBI</span></h1>
+        <div class="tagline">Conectando Destinos</div>
+    </div>
+
+    <div class="category-text">Mobilidade Urbana • Entregas • Tecnologia</div>
+
+    <!-- BANNER OFICIAL -->
+    <img src="https://i.postimg.cc/wT09x32h/IMG-20260607-WA0004.jpg" alt="Anúncio R1AMOBI" class="banner-amobi">
+
+    <div class="links-wrapper">
+        <a href="https://play.google.com/store/apps/details?id=br.com.r1amobi.passenger.taximachine" target="_blank" class="btn-link btn-google-play">
+            <i class="fab fa-google-play"></i> App Passageiro
+        </a>
+
+        <a href="https://play.google.com/store/apps/details?id=br.com.r1amobi.taxi.taximachine" target="_blank" class="btn-link btn-google-play">
+            <i class="fab fa-google-play"></i> App Parceiro
+        </a>
+
+        <!-- ORÇAMENTO PARTICULAR -->
+        <button onclick="toggleCalc()" class="btn-link btn-calc">
+            <i class="fas fa-calculator"></i> Orçamento Particular
+        </button>
+
+        <div id="calc-box">
+            <div class="input-group">
+                <label>1. Escolha a Categoria (Veja Valores)</label>
+                <div class="custom-selector">
+                    <div class="select-option" id="cat-moto" onclick="selectCat('Mototaxista (Urbano)', 'cat-moto')">
+                        <div class="option-header">
+                            <span><i class="fas fa-motorcycle"></i> Mototaxista (Urbano)</span>
+                            <small style="color:#ffea00;">R$ 8,00 Mín.</small>
+                        </div>
+                    </div>
+                    <div class="select-option" id="cat-entrega" onclick="selectCat('Serviço de Entrega (Urbano)', 'cat-entrega')">
+                        <div class="option-header">
+                            <span><i class="fas fa-box"></i> Serviço de Entrega (Urbano)</span>
+                            <small style="color:#ffea00;">R$ 8,00 Mín.</small>
+                        </div>
+                    </div>
+                    <div class="select-option" id="cat-viagem" onclick="selectCat('Viagem Intermunicipal', 'cat-viagem')">
+                        <div class="option-header">
+                            <span><i class="fas fa-road"></i> Viagem Intermunicipal</span>
+                            <small style="color:#ffea00;">R$ 2,00/km</small>
+                        </div>
+                        <small style="color:#777; font-size:10px; margin-top:2px;">* R$ 2,00 por km rodado + pedágio caso houver pedágio (haverá acréscimo)</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>2. Endereço de Origem completo</label>
+                <input type="text" id="origemInput" placeholder="Ex: Rua Santa Mariana, 500 - Assis-SP" oninput="validarForm()">
+            </div>
+
+            <div class="input-group">
+                <label>3. Endereço de Destino completo</label>
+                <input type="text" id="destinoInput" placeholder="Ex: Av. Getúlio Vargas, 509 - Paraguaçu Paulista-SP" oninput="validarForm()">
+            </div>
+
+            <div class="input-group">
+                <label>4. Forma de Pagamento</label>
+                <div class="custom-selector" style="grid-template-columns: 1fr 1fr 1fr;">
+                    <div class="select-option" id="pag-pix" onclick="selectPag('PIX', 'pag-pix')" style="align-items:center;"><span>PIX</span></div>
+                    <div class="select-option" id="pag-dinheiro" onclick="selectPag('Dinheiro', 'pag-dinheiro')" style="align-items:center;"><span>Dinheiro</span></div>
+                    <div class="select-option" id="pag-cartao" onclick="selectPag('Cartão (Maquininha)', 'pag-cartao')" style="align-items:center;"><span>Cartão</span></div>
+                </div>
+            </div>
+
+            <div class="input-group" id="campoTroco" style="display:none;">
+                <label>Precisa de troco?</label>
+                <input type="text" id="trocoInput" placeholder="Troco para quanto? Ex: R$ 50">
+            </div>
+
+            <div class="pix-box" id="campoPix">
+                <span style="font-size: 11px; color: #25d366; display: block; font-weight: bold;">Chave PIX (César Alberto - PicPay)</span>
+                <span style="font-size: 10px; color: #aaa;" id="chavePixTexto">65a038c5-3135-4acd-951d-05fd0f243525</span>
+                <br>
+                <button type="button" class="btn-copy-pix" onclick="copiarPix()">Copiar Chave</button>
+            </div>
+
+            <span id="obs-pagamento">⚠️ A MOTO SÓ SERÁ ENVIADA APÓS O PAGAMENTO CONFIRMADO.</span>
+
+            <button id="btnEnviarZap" onclick="enviarOrcamento()" class="btn-link btn-whatsapp" style="margin-top: 10px; width: 100%; display: none;">
+                <i class="fab fa-whatsapp"></i> Chamar Motoqueiro Particular
+            </button>
+        </div>
+
+        <a href="https://wa.me/5518997734471?text=Olá,%20vim%20pela%20bio%20do%20Instagram%20e%20quero%20mais%20informações" target="_blank" class="btn-link btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Atendimento WhatsApp
+        </a>
+
+        <a href="https://www.instagram.com/r1amobi?igsh=MTd2bHBtMXd2d2Jjcw==" target="_blank" class="btn-link btn-instagram">
+            <i class="fab fa-instagram"></i> Instagram Oficial
+        </a>
+
+        <a href="https://www.facebook.com/share/1CRXtygYSZ/" target="_blank" class="btn-link btn-facebook">
+            <i class="fab fa-facebook-f"></i> Facebook Oficial
+        </a>
+
+        <button onclick="togglePlayer()" class="btn-link btn-play">
+            <i class="fas fa-headphones"></i> Playlist R1AMOBI
+        </button>
+        <div id="video-player" style="display:none; margin-top:10px; width:100%;">
+            <iframe width="100%" height="180" src="https://www.youtube.com/embed/videoseries?list=PLvRY7L7X3ytTcjI0zOqMHIt_v1cXhHBXd" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="footer">
+        <strong>R1AMOBI</strong> - Mobilidade Urbana<br>Assis, SP
+    </div>
+
+    <!-- BANNER ADSENSE CARROSSEL -->
+    <a href="https://moto-gear-copy-d32b3b77.base44.app" target="_blank" class="adsense-footer">
+        <div class="ads-content">
+            <i class="fas fa-motorcycle"></i>
+            <div class="carousel-text" id="carousel">
+                <div class="carousel-item active">Equipamentos para sua moto! 🏍️</div>
+                <div class="carousel-item">Ofertas na Loja R1AMOBI 📦</div>
+                <div class="carousel-item">Qualidade Mercado Livre 🛡️</div>
+                <div class="carousel-item">Melhores Preços de Equipamentos 🔥</div>
+            </div>
+            <div class="btn-ads">VER LOJA</div>
+        </div>
+    </a>
+
+    <script>
+        let categoriaSelecionada = "";
+        let pagamentoSelecionado = "";
+
+        function toggleCalc() {
+            var box = document.getElementById("calc-box");
+            box.style.display = (box.style.display === "none") ? "block" : "none";
+        }
+
+        function selectCat(nome, id) {
+            document.querySelectorAll('#calc-box .custom-selector:nth-of-type(1) .select-option').forEach(el => el.classList.remove('selected'));
+            document.getElementById(id).classList.add('selected');
+            categoriaSelecionada = nome;
+            validarForm();
+        }
+
+        function selectPag(nome, id) {
+            document.querySelectorAll('#calc-box .custom-selector:nth-of-type(2) .select-option').forEach(el => el.classList.remove('selected'));
+            document.getElementById(id).classList.add('selected');
+            pagamentoSelecionado = nome;
+            
+            document.getElementById("campoPix").style.display = (nome === "PIX") ? "block" : "none";
+            document.getElementById("campoTroco").style.display = (nome === "Dinheiro") ? "block" : "none";
+            validarForm();
+        }
+
+        function copiarPix() {
+            var chave = document.getElementById("chavePixTexto").innerText;
+            navigator.clipboard.writeText(chave).then(function() { alert("Chave PIX copiada!"); });
+        }
+
+        function validarForm() {
+            var ori = document.getElementById("origemInput").value;
+            var dest = document.getElementById("destinoInput").value;
+            var btn = document.getElementById("btnEnviarZap");
+            
+            if (categoriaSelecionada && pagamentoSelecionado && ori && dest) {
+                btn.style.display = "flex";
+            } else {
+                btn.style.display = "none";
+            }
+        }
+
+        function enviarOrcamento() {
+            var ori = document.getElementById("origemInput").value;
+            var dest = document.getElementById("destinoInput").value;
+            var troco = document.getElementById("trocoInput").value;
+            
+            var mapsLink = "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(ori) + "&destination=" + encodeURIComponent(dest);
+
+            var textoMensagem = "🏁 *NOVA CORRIDA PARTICULAR - R1AMOBI* 🏁\n\n" +
+                                "🏍️ *Serviço:* " + categoriaSelecionada + "\n" +
+                                "📍 *Origem:* " + ori + "\n" +
+                                "🏁 *Destino:* " + dest + "\n" +
+                                "💳 *Pagamento:* " + pagamentoSelecionado;
+
+            if (pagamentoSelecionado === "Dinheiro" && troco) {
+                textoMensagem += " (Troco para: " + troco + ")";
+            }
+
+            textoMensagem += "\n\n🗺️ *Rota no Google Maps:*\n" + mapsLink + "\n\n" +
+                             "⚠️ _O cliente está ciente de que a moto só será enviada após a confirmação do pagamento._";
+
+            var urlWhatsApp = "https://wa.me/5518998165086?text=" + encodeURIComponent(textoMensagem);
+            window.open(urlWhatsApp);
+        }
+
+        function togglePlayer() {
+            var p = document.getElementById("video-player");
+            p.style.display = (p.style.display === "none") ? "block" : "none";
+        }
+
+        // --- LÓGICA DO CARROSSEL ---
+        let currentItem = 0;
+        const items = document.querySelectorAll('.carousel-item');
+        setInterval(() => {
+            if(items.length > 0) {
+                items[currentItem].classList.remove('active');
+                currentItem = (currentItem + 1) % items.length;
+                items[currentItem].classList.add('active');
+            }
+        }, 3000);
+
+        // --- ANIMAÇÃO ASFALTO ORIGINAL ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let particles = [];
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5; this.speed = Math.random() * 4 + 2;
+                this.color = Math.random() > 0.5 ? '#ff0000' : '#ffffff'; this.opacity = Math.random() * 0.4;
+            }
+            update() { this.x += this.speed; if (this.x > canvas.width) { this.x = -10; this.y = Math.random() * canvas.height; } }
+            draw() {
+                ctx.beginPath(); ctx.lineWidth = this.size; ctx.strokeStyle = this.color;
+                ctx.globalAlpha = this.opacity; ctx.moveTo(this.x, this.y); ctx.lineTo(this.x - 20, this.y);
+                ctx.stroke(); ctx.globalAlpha = 1;
+            }
+        }
+        function init() { for (let i = 0; i < 60; i++) particles.push(new Particle()); }
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        init(); animate();
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+    </script>
+</body>
+</html>
