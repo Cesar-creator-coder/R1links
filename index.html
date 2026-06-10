@@ -90,6 +90,40 @@
         .btn-play { color: #bf00ff; border-color: #bf00ff; box-shadow: 0 0 10px rgba(191, 0, 255, 0.3); }
         .btn-play:hover { background: #bf00ff; color: #fff; box-shadow: 0 0 30px #bf00ff; }
 
+        /* --- BOTÃO DE PARCEIROS (MARKETPLACE NEON DO CLIENTE) --- */
+        .btn-partners { color: #00ffaa; border-color: #00ffaa; box-shadow: 0 0 10px rgba(0, 255, 170, 0.2); }
+        .btn-partners:hover { background: #00ffaa; color: #000; box-shadow: 0 0 30px #00ffaa; }
+
+        /* BOX DOS PARCEIROS HORIZONTAL SLIDER */
+        #partners-box {
+            display: none; width: 100%; background: rgba(10, 10, 10, 0.95);
+            border: 1px solid #00ffaa; border-radius: 20px; padding: 15px 10px; margin-top: -10px; margin-bottom: 15px; box-sizing: border-box;
+            box-shadow: 0 0 15px rgba(0, 255, 170, 0.15);
+        }
+
+        .partners-horizontal-container {
+            display: flex; justify-content: center; align-items: center; gap: 35px; width: 100%; padding: 5px 0;
+        }
+
+        .partner-horizontal-item {
+            display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; text-align: center;
+        }
+
+        .partner-logo-clickable {
+            width: 75px; height: 75px; border-radius: 50%; border: 2.5px solid #00ffaa;
+            object-fit: cover; background: #000; box-shadow: 0 0 12px rgba(0, 255, 170, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        /* Efeito de Clique profissional estilo PWA Nativo */
+        .partner-horizontal-item:active .partner-logo-clickable {
+            transform: scale(0.92); box-shadow: 0 0 25px #00ffaa; border-color: #fff;
+        }
+
+        .partner-label-name {
+            font-size: 0.75rem; font-weight: bold; color: #fff; letter-spacing: 0.5px; text-transform: uppercase;
+        }
+
         /* --- DESIGN DO ORÇAMENTO PARTICULAR --- */
         #calc-box {
             display: none; width: 100%; background: rgba(10, 10, 10, 0.95);
@@ -263,6 +297,24 @@
         <div id="video-player" style="display:none; margin-top:10px; width:100%;">
             <iframe width="100%" height="180" src="https://www.youtube.com/embed/videoseries?list=PLvRY7L7X3ytTcjI0zOqMHIt_v1cXhHBXd" frameborder="0" allowfullscreen></iframe>
         </div>
+
+        <button onclick="togglePartners()" class="btn-link btn-partners">
+            <i class="fas fa-handshake"></i> Parceiros Recomendados
+        </button>
+
+        <div id="partners-box">
+            <div class="partners-horizontal-container">
+                <a href="https://motokaz18express.my.canva.site/concha-lanches-card-pio-digital" target="_blank" class="partner-horizontal-item">
+                    <img src="https://i.postimg.cc/cH52pH83/IMG-20260609-WA0026.jpg" alt="Concha Lanches" class="partner-logo-clickable">
+                    <span class="partner-label-name">Concha</span>
+                </a>
+
+                <a href="https://motokaz18express.my.canva.site/pedido-pastel-e-cia" target="_blank" class="partner-horizontal-item">
+                    <img src="https://i.postimg.cc/GhRV6Z4x/IMG-20260609-WA0027.jpg" alt="Pastel & Cia" class="partner-logo-clickable">
+                    <span class="partner-label-name">Pastel & Cia</span>
+                </a>
+            </div>
+        </div>
     </div>
 
     <div class="footer">
@@ -286,22 +338,24 @@
         let categoriaSelecionada = "";
         let pagamentoSelecionado = "";
 
+        // --- SISTEMA DE EXPANDIR/ESCONDER OS PARCEIROS ---
+        function togglePartners() {
+            var box = document.getElementById("partners-box");
+            box.style.display = (box.style.display === "none") ? "block" : "none";
+        }
+
         // --- SISTEMA DE CLIMA DESTRANCADO POR LINK DIRETO ---
         function carregarClimaEData() {
-            // Configurar Data Local na Tela
             const opcoesData = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
             const dataHoje = new Date().toLocaleDateString('pt-BR', opcoesData);
             document.getElementById("txt-data-atual").innerText = dataHoje;
 
-            // API Alternativa com Bypass de Protocolo para não dar erro de bloqueio no Chrome
-            // Ela busca os dados de geolocalização e clima direto de canais públicos estáveis
             fetch(`https://wttr.in/Assis?format=j1`)
                 .then(res => res.json())
                 .then(dados => {
                     const tempAtual = dados.current_condition[0].temp_C;
                     const descClima = dados.current_condition[0].lang_pt[0].value;
                     
-                    // Ícone com base na temperatura e condição de Assis
                     let iconeTermometro = '<i class="fas fa-thermometer-half" style="color: #ff0000; text-shadow: 0 0 10px #ff0000;"></i>';
                     let fraseImpacto = "Pista limpa. Chame a R1AMOBI e chegue rápido ao seu destino! 🏁";
 
@@ -315,18 +369,15 @@
                         fraseImpacto = "Clima frio na cidade. Peça agora e viaje bem protegido do vento! ❄️";
                     }
 
-                    // Força a injeção do termômetro real e do texto na tela do usuário
                     document.getElementById("txt-clima-atual").innerHTML = `${iconeTermometro} <span>${tempAtual}</span>°C`;
                     document.getElementById("txt-frase-clima").innerText = `${descClima.toUpperCase()} — ${fraseImpacto}`;
                 })
                 .catch(() => {
-                    // Margem de segurança caso o satélite caia por completo, injeta temperatura estimada padrão
                     document.getElementById("txt-clima-atual").innerHTML = '<i class="fas fa-thermometer-three-quarters" style="color:#ff0000;"></i> 23°C';
                     document.getElementById("txt-frase-clima").innerText = "CÉU LIMPO — Pista perfeita em Assis! Chame a R1AMOBI para acelerar o seu dia! 🏁";
                 });
         }
 
-        // Inicializar o carregador climático
         window.addEventListener('DOMContentLoaded', carregarClimaEData);
 
         function toggleCalc() {
@@ -353,7 +404,7 @@
 
         function copiarPix() {
             var chave = document.getElementById("chavePixTexto").innerText;
-            navigator.clipboard.writeText(chave).then(function() { alert("Chave PIX copiada!"); });
+            navigator.clipboard.writeText(chave).then(function() { alert("Chave PIX copied!"); });
         }
 
         function validarForm() {
