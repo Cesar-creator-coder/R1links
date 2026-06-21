@@ -1,0 +1,21 @@
+{
+  "name": "R1AMOBI - Conectando Destinos",
+  "short_name": "R1AMOBI",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "description": "Hub Oficial da R1AMOBI - Mobilidade Urbana e Entregas em Assis SP",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/YCkbcg3Z/1001160121-removebg-preview.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.postimg.cc/YCkbcg3Z/1001160121-removebg-preview.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
