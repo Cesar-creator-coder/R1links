@@ -119,13 +119,24 @@
         }
         .super-publi-img { width: 100%; display: block; object-fit: cover; }
 
-        /* CONTAINER ROTATIVO DE BANNERS PEQUENOS */
+        /* CONTAINER ROTATIVO DE BANNERS COM SETAS DE NAVEGAÇÃO PROFISSIONAIS */
         .banner-carousel-wrapper {
             width: 100%; max-width: 380px; position: relative; margin-bottom: 20px;
             border-radius: 12px; overflow: hidden; box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); border: 1px solid #333;
         }
         .banner-amobi { width: 100%; display: none; object-fit: cover; }
         .banner-amobi.active { display: block; }
+        
+        .banner-control-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff; width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 10; transition: all 0.2s; font-size: 0.8rem;
+        }
+        .banner-control-btn:active { background: var(--color-r1); border-color: var(--color-r1); }
+        .banner-control-prev { left: 8px; }
+        .banner-control-next { right: 8px; }
 
         .links-wrapper { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 15px; }
 
@@ -288,6 +299,11 @@
 
         .admin-partner-row { display: flex; align-items: center; justify-content: space-between; background: #1c1c1c; padding: 10px; border-radius: 8px; margin-bottom: 8px; border: 1px solid #333; gap: 8px; color: white; font-size: 12px; }
         .admin-partner-row img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
+        
+        /* BOTÕES DE ORDENAÇÃO NO PAINEL ADMIN */
+        .admin-order-controls { display: flex; gap: 4px; }
+        .btn-order-move { background: #333; color: #fff; border: 1px solid #555; padding: 4px 6px; font-size: 10px; border-radius: 4px; cursor: pointer; }
+        .btn-order-move:active { background: #ff0000; border-color: #ff0000; }
 
         /* --- FAIXA AMARELA AD SENSE RESTAURADA NO PADRÃO ORIGINAL --- */
         .adsense-footer {
@@ -372,7 +388,11 @@
         <img src="" class="super-publi-img" id="img-super-publi-source">
     </div>
 
-    <div class="banner-carousel-wrapper" id="main-banners-carousel-zone"></div>
+    <div class="banner-carousel-wrapper">
+        <div class="banner-control-btn banner-control-prev" onclick="navegarBannersManualmente(-1)"><i class="fas fa-chevron-left"></i></div>
+        <div class="banner-control-btn banner-control-next" onclick="navegarBannersManualmente(1)"><i class="fas fa-chevron-right"></i></div>
+        <div id="main-banners-carousel-zone"></div>
+    </div>
 
     <div class="links-wrapper" id="main-buttons-wrapper-zone">
         <a href="https://play.google.com/store/apps/details?id=br.com.r1amobi.passenger.taximachine" target="_blank" class="btn-link btn-google-play">
@@ -405,7 +425,7 @@
                     </div>
                     <div class="select-option" id="cat-entrega" onclick="selectCat('Serviço de Entrega (Urbano)', 'cat-entrega')">
                         <div class="option-header">
-                            <span><i class="fas fa-box"></i> Serviço de Entrega (Urbano)</span>
+                            <span><i class="fas fa-box"></i> Servicio de Entrega (Urbano)</span>
                             <small style="color:#ffea00;">R$ 8,00 Mín.</small>
                         </div>
                     </div>
@@ -527,7 +547,7 @@
 
     <div id="modal-login-admin" class="modal-admin-overlay">
         <div class="admin-card">
-            <div class="admin-card-title"><i class="fas fa-lock"></i> Login do Painel</div>
+            <div class="admin-card-title"><i class="fas fa-lock"></i> Login do Panel</div>
             <div class="input-admin-group">
                 <label>Telefone de Acesso</label>
                 <input type="text" id="login-phone" placeholder="Ex: 18997734471">
@@ -600,7 +620,7 @@
             <div class="input-admin-group"><label>Link de Destino do Banner (WhatsApp, Site, Cardápio) - *Opcional</label><input type="text" id="banner-new-link" placeholder="https://i.postimg.cc/..."></div>
             <button class="btn-admin-panel" style="background:#00ffaa; color:#000; margin-bottom:15px;" onclick="salvarNovoBannerMemoria()">Adicionar Banner</button>
 
-            <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">🗑️ Remover Banners Ativos</div>
+            <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">🗑️ Reordenar & Remover Banners Ativos</div>
             <div id="admin-banners-list-zone" style="margin-bottom:15px;"></div>
 
             <div style="font-size: 11px; color:#bf00ff; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:15px;">📹 Gerenciador de Câmeras por Cidade</div>
@@ -628,7 +648,7 @@
             </div>
             <button class="btn-admin-panel" style="background:#00ffaa; color:#000; margin-bottom:15px;" onclick="salvarNovoBotaoManual()">Adicionar Botão Novo</button>
 
-            <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">🗑️ Remover Botões Criados</div>
+            <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">🗑️ Reordenar & Remover Botões Criados</div>
             <div id="admin-buttons-list-zone" style="margin-bottom:15px;"></div>
 
             <div style="font-size: 11px; color:#00ffaa; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:15px;" id="lbl-parceiro-admin-titulo">🤝 Cadastrar Novo Parceiro Comercial</div>
@@ -656,7 +676,7 @@
             <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">🗑️ Remover Produtos Ativos</div>
             <div id="admin-products-list-zone" style="margin-bottom:15px;"></div>
 
-            <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-top:15px; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:15px;">⚙️ Remover Parceiros Ativos</div>
+            <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-top:15px; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:15px;">⚙️ Reordenar & Remover Parceiros Ativos</div>
             <div id="admin-partners-list-zone"></div>
 
             <button class="btn-admin-panel btn-admin-primary" style="background:#00ffaa; color:#000; font-weight:900; margin-top:20px;" onclick="aplicarEGravarTudo()">Gravar Tudo e Reiniciar</button>
@@ -664,7 +684,7 @@
         </div>
     </div>
 
-<div class="footer">
+    <div class="footer">
         <strong>R1AMOBI</strong> - Conectando Destinos<br>Plataforma Tecnológica de Mobilidade & Logística<br>Assis - SP
         <br>
         <a id="lnk-footer-signature" href="https://wa.me/5518998165086?text=Ol%C3%A1!%20Vi%20o%20projeto%20desenvolvido%20por%20voc%C3%AA%20e%20gostaria%20de%20receber%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20cria%C3%A7%C3%A3o%20de%20uma%20p%C3%A1gina%2C%20site%20ou%20sistema%20semelhante%20para%20meu%20neg%C3%B3cio." target="_blank" style="color: #666; text-decoration: none; font-size: 0.72rem; display: inline-block; margin-top: 10px; font-weight: 500; letter-spacing: 0.5px; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.color='var(--color-partners)'; this.style.textShadow='0 0 8px var(--color-partners)';" onmouseout="this.style.color='#666'; this.style.textShadow='none';">
@@ -828,16 +848,7 @@
 
             gerenciarSistemaDeFundoAtivo(); atualizarAPIsPublicasWidgets();
 
-            const bannerZone = document.getElementById('main-banners-carousel-zone');
-            if(bannerZone) {
-                bannerZone.innerHTML = "";
-                (appConfig.bannersList || []).forEach((bannerObj, idx) => {
-                    const imgUrl = bannerObj.url || ""; const linkUrl = bannerObj.link || ""; const cliqueAtivo = linkUrl ? `onclick="registrarCliqueBanner(${idx}, '${linkUrl}')" style="cursor:pointer;"` : '';
-                    bannerZone.innerHTML += `<img src="${imgUrl}" alt="Anúncio R1AMOBI" class="banner-amobi ${idx === 0 ? 'active' : ''}" ${cliqueAtivo}>`;
-                });
-            }
-            clearInterval(intervaloRotacaoBannersElement); bannerIndexAtivoGlobal = 0; const imagensBannersDom = document.querySelectorAll('.banner-carousel-wrapper .banner-amobi');
-            if(imagensBannersDom.length > 1) { intervaloRotacaoBannersElement = setInterval(() => { if(imagensBannersDom[bannerIndexAtivoGlobal]) imagensBannersDom[bannerIndexAtivoGlobal].classList.remove('active'); bannerIndexAtivoGlobal = (bannerIndexAtivoGlobal + 1) % imagensBannersDom.length; if(imagensBannersDom[bannerIndexAtivoGlobal]) imagensBannersDom[bannerIndexAtivoGlobal].classList.add('active'); }, 4000); }
+            renderizarBannersNaTelaMudarQuadro();
 
             const btnZone = document.getElementById('custom-admin-buttons-zone');
             if(btnZone) {
@@ -864,6 +875,44 @@
                 });
             }
             renderizarCamerasFronte();
+        }
+
+        /* ✅ REPROGRAMAÇÃO DO COMPORTAMENTO DO CARROSSEL DE BANNERS */
+        function renderizarBannersNaTelaMudarQuadro() {
+            const bannerZone = document.getElementById('main-banners-carousel-zone');
+            if(!bannerZone) return;
+            bannerZone.innerHTML = "";
+            const lista = appConfig.bannersList || [];
+            if(lista.length === 0) {
+                bannerZone.innerHTML = `<img src="https://via.placeholder.com/380x140?text=R1AMOBI+Publicidade" class="banner-amobi active">`;
+                return;
+            }
+            lista.forEach((bannerObj, idx) => {
+                const imgUrl = bannerObj.url || ""; const linkUrl = bannerObj.link || ""; const cliqueAtivo = linkUrl ? `onclick="window.open('${linkUrl}', '_blank')"` : '';
+                bannerZone.innerHTML += `<img src="${imgUrl}" class="banner-amobi ${idx === bannerIndexAtivoGlobal ? 'active' : ''}" ${cliqueAtivo}>`;
+            });
+            reiniciarTemporizadorAutomaticoBanners();
+        }
+
+        function navegarBannersManualmente(direcao) {
+            const imagensBannersDom = document.querySelectorAll('#main-banners-carousel-zone .banner-amobi');
+            if(imagensBannersDom.length <= 1) return;
+            imagensBannersDom[bannerIndexAtivoGlobal].classList.remove('active');
+            bannerIndexAtivoGlobal = (bannerIndexAtivoGlobal + direcao + imagensBannersDom.length) % imagensBannersDom.length;
+            imagensBannersDom[bannerIndexAtivoGlobal].classList.add('active');
+            reiniciarTemporizadorAutomaticoBanners();
+        }
+
+        function reiniciarTemporizadorAutomaticoBanners() {
+            clearInterval(intervaloRotacaoBannersElement);
+            const imagensBannersDom = document.querySelectorAll('#main-banners-carousel-zone .banner-amobi');
+            if(imagensBannersDom.length > 1) {
+                intervaloRotacaoBannersElement = setInterval(() => {
+                    imagensBannersDom[bannerIndexAtivoGlobal].classList.remove('active');
+                    bannerIndexAtivoGlobal = (bannerIndexAtivoGlobal + 1) % imagensBannersDom.length;
+                    imagensBannersDom[bannerIndexAtivoGlobal].classList.add('active');
+                }, 5000);
+            }
         }
 
         function registrarCliqueSecreto() { contagemCliquesLogo++; clearTimeout(timerResetCliques); if (contagemCliquesLogo >= 7) { contagemCliquesLogo = 0; document.getElementById('modal-login-admin').style.display = 'flex'; } else { timerResetCliques = setTimeout(() => { contagemCliquesLogo = 0; }, 2000); } }
@@ -902,23 +951,72 @@
         }
         function fecharPainelAdmin() { document.getElementById('modal-panel-admin').style.display = 'none'; }
 
+        /* ✅ SISTEMA DE REORDENAÇÃO COMPLETA DOS ELEMENTOS NO PAINEL ADMIN */
+        function reordenarItemListaConfig(tipo, index, direcao) {
+            let listaTarget = [];
+            if(tipo === 'banners') listaTarget = appConfig.bannersList;
+            else if(tipo === 'botoes') listaTarget = appConfig.botoesManuais;
+            else if(tipo === 'parceiros') listaTarget = appConfig.parceiros;
+            
+            let novoIndex = index + direcao;
+            if(novoIndex < 0 || novoIndex >= listaTarget.length) return;
+            
+            let itemTemporario = listaTarget[index];
+            listaTarget[index] = listaTarget[novoIndex];
+            listaTarget[novoIndex] = itemTemporario;
+            
+            if(tipo === 'banners') renderizerListaDeRemocaoBanners();
+            else if(tipo === 'botoes') renderizerListaDeRemocaoBotoes();
+            else if(tipo === 'parceiros') renderizerListaDeRemocaoParceiros();
+        }
+
         function renderizerListaDeRemocaoBanners() {
             const zone = document.getElementById('admin-banners-list-zone'); zone.innerHTML = "";
-            appConfig.bannersList.forEach((b, idx) => { zone.innerHTML += `<div class="admin-partner-row" style="padding:10px;"><span>Banner #${idx+1}</span><button class="btn-remove-partner" onclick="deletarBannerMemoria(${idx})">Remover</button></div>`; });
+            appConfig.bannersList.forEach((b, idx) => {
+                zone.innerHTML += `
+                    <div class="admin-partner-row" style="padding:10px;">
+                        <span>Banner #${idx+1}</span>
+                        <div class="admin-order-controls">
+                            <button class="btn-order-move" onclick="reordenarItemListaConfig('banners', ${idx}, -1)">▲</button>
+                            <button class="btn-order-move" onclick="reordenarItemListaConfig('banners', ${idx}, 1)">▼</button>
+                            <button class="btn-remove-partner" onclick="deletarBannerMemoria(${idx})">Remover</button>
+                        </div>
+                    </div>`;
+            });
         }
         function salvarNovoBannerMemoria() { const url = document.getElementById('banner-new-url').value.trim(); const link = document.getElementById('banner-new-link').value.trim(); if(!url) return; appConfig.bannersList.push({ url, link }); document.getElementById('banner-new-url').value = ""; renderizerListaDeRemocaoBanners(); }
         function deletarBannerMemoria(idx) { if(appConfig.bannersList.length <= 1) return; appConfig.bannersList.splice(idx, 1); renderizerListaDeRemocaoBanners(); }
 
         function renderizerListaDeRemocaoBotoes() {
             const zone = document.getElementById('admin-buttons-list-zone'); zone.innerHTML = "";
-            (appConfig.botoesManuais || []).forEach((b, idx) => { zone.innerHTML += `<div class="admin-partner-row" style="padding:10px;"><span style="color:${b.color}">${b.text}</span><button class="btn-remove-partner" onclick="deletarBotaoManualMemoria(${idx})">Remover</button></div>`; });
+            (appConfig.botoesManuais || []).forEach((b, idx) => {
+                zone.innerHTML += `
+                    <div class="admin-partner-row" style="padding:10px;">
+                        <span style="color:${b.color}">${b.text}</span>
+                        <div class="admin-order-controls">
+                            <button class="btn-order-move" onclick="reordenarItemListaConfig('botoes', ${idx}, -1)">▲</button>
+                            <button class="btn-order-move" onclick="reordenarItemListaConfig('botoes', ${idx}, 1)">▼</button>
+                            <button class="btn-remove-partner" onclick="deletarBotaoManualMemoria(${idx})">Remover</button>
+                        </div>
+                    </div>`;
+            });
         }
         function salvarNovoBotaoManual() { const text = document.getElementById('btn-new-text').value.trim(); const url = document.getElementById('btn-new-url').value.trim(); const color = document.getElementById('btn-new-color').value; if(!text || !url) return; appConfig.botoesManuais.push({ text, url, color }); document.getElementById('btn-new-text').value = ""; document.getElementById('btn-new-url').value = ""; renderizerListaDeRemocaoBotoes(); }
         function deletarBotaoManualMemoria(index) { appConfig.botoesManuais.splice(index, 1); renderizerListaDeRemocaoBotoes(); }
 
         function renderizerListaDeRemocaoParceiros() {
             const zone = document.getElementById('admin-partners-list-zone'); zone.innerHTML = "";
-            appConfig.parceiros.forEach((p, idx) => { zone.innerHTML += `<div class="admin-partner-row" style="padding:10px;"><span>${p.name}</span><button class="btn-remove-partner" onclick="deletarParceiroMemoria(${idx})">Remover</button></div>`; });
+            appConfig.parceiros.forEach((p, idx) => {
+                zone.innerHTML += `
+                    <div class="admin-partner-row" style="padding:10px;">
+                        <span>${p.name}</span>
+                        <div class="admin-order-controls">
+                            <button class="btn-order-move" onclick="reordenarItemListaConfig('parceiros', ${idx}, -1)">▲</button>
+                            <button class="btn-order-move" onclick="reordenarItemListaConfig('parceiros', ${idx}, 1)">▼</button>
+                            <button class="btn-remove-partner" onclick="deletarParceiroMemoria(${idx})">Remover</button>
+                        </div>
+                    </div>`;
+            });
         }
         function salvarNovoParceiro() { const name = document.getElementById('part-new-name').value.trim(); const img = document.getElementById('part-new-img').value.trim(); const url = document.getElementById('part-new-link').value.trim(); const type = document.getElementById('part-new-type').value; if(!name || !img || !url) return; appConfig.parceiros.push({ name, img, url, type }); document.getElementById('part-new-name').value = ""; document.getElementById('part-new-img').value = ""; document.getElementById('part-new-link').value = ""; renderizerListaDeRemocaoParceiros(); alimentarSeletorLojasNoAdmin(); }
         function deletarParceiroMemoria(index) { appConfig.parceiros.splice(index, 1); renderizerListaDeRemocaoParceiros(); alimentarSeletorLojasNoAdmin(); }
@@ -1027,7 +1125,7 @@
 
         function carregarClimaEData() {
             document.getElementById("txt-data-atual").innerText = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-            const diasSemanaFrases = ["Domingo de rota ativa. Fé na caminhada e acelerador consciente! 🏁", "Segunda-feira bruta! Semana começando, foca no progresso e marcha nas entregas! 🏍️💨", "Terça-feira de elite! Moto revisada e asfalto quente. Destino traçado com sucesso! 🔥", "Quarta-feira de ritmo forte! Meio da semana, o corre não para e a R1 voa baixo! 🚀", "Quinta-feira de alta performance! Foco no objetivo, cada entrega é um passo pro topo! 🛡️", "Sexta-feira estralando! Fim de semana colado, acelera com responsabilidade no asfalto! ⚡", "Sábado de pique total! Dia de pique na cidade, corre ágil e certeiro é aqui! 🏍️📦"];
+            const diasSemanaFrases = ["Domingo de rota ativa. Fé na caminhada e acelerador consciente! 🏁", "Segunda-feira bruta! Semana começando, foca no progresso e marcha nas entregas! 🏍️💨", "Terça-feira de elite! Moto revisada e asfalto quente. Destino traçado com sucesso! 🔥", "Quarta-feira de ritmo forte! Meio da semana, o corre não para e a R1 voa baixo! 🚀", "Quinta-feira de alta performance! Foco no objetivo, cada entrega é um passo pro topo! 🛡️", "Sexta-feira estralando! Fim de semana colado, acelera com responsabilidade no asfalto! ⚡", "Sábado de pique total! Dia de pico na cidade, corre ágil e certeiro é aqui! 🏍️📦"];
             let fraseDoDiaMotivacional = diasSemanaFrases[new Date().getDay()];
             fetch(`https://wttr.in/Assis?format=j1`).then(res => res.json()).then(dados => {
                 const descClima = dados.current_condition[0].lang_pt[0].value; document.getElementById("txt-frase-clima").innerText = `${descClima.toUpperCase()} — ${fraseDoDiaMotivacional}`;
