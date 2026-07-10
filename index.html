@@ -23,6 +23,7 @@
             --color-r1: #ff0000;
             --color-calc: #ffea00;
             --color-partners: #00ffaa;
+            --color-cameras: #bf00ff;
             --color-bg-panel: rgba(15, 15, 15, 0.98);
         }
 
@@ -50,7 +51,7 @@
 
         body {
             margin: 0; color: #ffffff; font-family: 'Segoe UI', Roboto, sans-serif;
-            padding: 40px 20px 100px 20px; display: flex; flex-direction: column; align-items: center; overflow-x: hidden;
+            padding: 40px 20px 140px 20px; display: flex; flex-direction: column; align-items: center; overflow-x: hidden;
         }
 
         .profile-container { text-align: center; margin-bottom: 20px; position: relative; width: 100%; max-width: 380px; }
@@ -97,7 +98,7 @@
             border-radius: 16px; padding: 12px; box-sizing: border-box; backdrop-filter: blur(5px);
             display: flex; flex-direction: column; justify-content: space-between; height: 85px;
         }
-        .widget-card-title { font-size: 0.75rem; color: #aaa; font-weight: bold; }
+        .widget-title { font-size: 0.75rem; color: #aaa; font-weight: bold; }
         .widget-main-value { font-size: 1.25rem; font-weight: bold; display: flex; align-items: center; gap: 6px; }
         .widget-sub-value { font-size: 0.68rem; color: #888; display: flex; align-items: center; gap: 4px; }
 
@@ -118,24 +119,15 @@
         }
         .super-publi-img { width: 100%; display: block; object-fit: cover; }
 
-        /* ✅ REAJUSTE SEGURO DOS BANNERS SEM CORTAR LETRAS */
+        /* CONTAINER ROTATIVO DE BANNERS PEQUENOS */
         .banner-carousel-wrapper {
-            width: 100%;
-            max-width: 380px;
-            position: relative;
-            margin-bottom: 20px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
-            border: 1px solid #333;
-            height: auto;
-            max-height: 140px;
-            aspect-ratio: 16/9;
+            width: 100%; max-width: 380px; position: relative; margin-bottom: 20px;
+            border-radius: 12px; overflow: hidden; box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); border: 1px solid #333;
         }
-        .banner-amobi { width: 100%; height: 100%; display: none; object-fit: cover; }
+        .banner-amobi { width: 100%; display: none; object-fit: cover; }
         .banner-amobi.active { display: block; }
 
-        .links-wrapper { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 15px; box-sizing: border-box; }
+        .links-wrapper { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 15px; }
 
         .btn-link {
             text-decoration: none; padding: 16px; border-radius: 50px;
@@ -166,6 +158,9 @@
 
         .btn-partners { color: var(--color-partners); border-color: var(--color-partners); box-shadow: 0 0 10px rgba(0, 255, 170, 0.2); }
         .btn-partners:hover { background: var(--color-partners); color: #000; box-shadow: 0 0 30px var(--color-partners); }
+
+        .btn-cameras { color: var(--color-cameras); border-color: var(--color-cameras); box-shadow: 0 0 10px rgba(191, 0, 255, 0.2); }
+        .btn-cameras:hover { background: var(--color-cameras); color: #fff; box-shadow: 0 0 30px var(--color-cameras); }
 
         /* BOX DOS PARCEIROS HORIZONTAL SLIDER */
         #partners-box {
@@ -202,6 +197,21 @@
             font-size: 11px; cursor: pointer; transition: all 0.2s; margin-top: 2px;
         }
         .btn-share-partner:active { transform: scale(0.85); background: var(--color-partners); color: #000; }
+
+        /* BOX CÂMERAS AO VIVO */
+        #cameras-box {
+            display: none; width: 100%; background: rgba(10, 10, 10, 0.95);
+            border: 1px solid var(--color-cameras); border-radius: 20px; padding: 20px; margin-top: -10px; margin-bottom: 15px; box-sizing: border-box;
+            box-shadow: 0 0 15px rgba(191, 0, 255, 0.15);
+        }
+        .cameras-container { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+        .btn-camera-city {
+            background: rgba(20, 20, 20, 0.9); border: 1px solid var(--color-cameras); color: white;
+            padding: 12px; border-radius: 12px; cursor: pointer; font-weight: bold; text-transform: uppercase;
+            font-size: 0.75rem; display: flex; align-items: center; justify-content: space-between; transition: all 0.3s; width: 100%; box-sizing: border-box;
+        }
+        .camera-status-dot { width: 8px; height: 8px; border-radius: 50%; background: #00ffaa; display: inline-block; }
+        .camera-status-dot.paused { background: #ffaa00; }
 
         .store-products-wrap { display: flex; flex-direction: column; gap: 12px; margin-top: 15px; max-height: 280px; overflow-y: auto; padding-right: 5px; }
         .store-product-card { display: flex; gap: 10px; background: #151515; border: 1px solid #2a2a2a; border-radius: 10px; padding: 8px; align-items: center; }
@@ -247,7 +257,7 @@
 
         #obs-pagamento { font-size: 10px; color: #ff0000; font-weight: bold; text-align: center; margin: 10px 0; display: block; }
         #video-player { display: none; margin-top: 10px; width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #bf00ff; }
-        .footer { margin-top: 40px; font-size: 0.8rem; color: #888; text-align: center; line-height: 1.5; letter-spacing: 1px; margin-bottom: 15px; }
+        .footer { margin-top: 50px; font-size: 0.8rem; color: #888; text-align: center; line-height: 1.5; letter-spacing: 1px; margin-bottom: 90px; }
 
         /* --- SINALIZADOR VISUAL DE MODAIS INTERNOS --- */
         .modal-admin-overlay {
@@ -273,7 +283,7 @@
         .eye-toggle { position: absolute; right: 12px; top: 32px; color: #888; cursor: pointer; font-size: 16px; }
 
         .btn-admin-panel { width: 100%; padding: 14px; border-radius: 10px; font-weight: bold; border: none; text-transform: uppercase; cursor: pointer; font-size: 0.85rem; margin-top: 10px; }
-        .btn-admin-primary { background: #00ffaa; color: #000; box-shadow: 0 0 15px rgba(0,255,170,0.4); }
+        .btn-admin-primary { background: #ff0000; color: white; box-shadow: 0 0 15px rgba(255,0,0,0.4); }
         .btn-admin-cancel { background: #333; color: #ccc; margin-top: 8px; }
 
         .admin-partner-row { display: flex; align-items: center; justify-content: space-between; background: #1c1c1c; padding: 10px; border-radius: 8px; margin-bottom: 8px; border: 1px solid #333; gap: 8px; color: white; font-size: 12px; }
@@ -452,6 +462,13 @@
             </button>
         </div>
 
+        <button onclick="toggleCameras()" class="btn-link btn-cameras">
+            <i class="fas fa-camera"></i> Câmeras Ao Vivo
+        </button>
+        <div id="cameras-box">
+            <div class="cameras-container" id="dinamic-cameras-container"></div>
+        </div>
+
         <a href="https://wa.me/5518997734471?text=Olá,%20vim%20pela%20bio%20do%20Instagram%20e%20quero%20mais%20informações" target="_blank" class="btn-link btn-whatsapp">
             <i class="fab fa-whatsapp"></i> Atendimento WhatsApp
         </a>
@@ -470,8 +487,8 @@
             <i class="fas fa-headphones"></i> Playlist R1AMOBI
         </button>
         <div id="video-player" style="display:none; margin-top:10px; width:100%; flex-direction:column; gap:10px;">
-            <iframe id="frame-playlist-1" width="100%" height="180" src="https://www.youtube.com/embed/videoseries?list=PLvRY7L7X3ytTcjI0zOqMHIt_v1cXhHBXd" frameborder="0" allowfullscreen loading="lazy"></iframe>
-            <iframe id="frame-playlist-2" width="100%" height="180" src="https://www.youtube.com/embed/videoseries?list=PLCk95CAcxmRwTJEUflt4ylx5KMM6ag0pl" frameborder="0" allowfullscreen loading="lazy"></iframe>
+            <iframe id="frame-playlist-1" width="100%" height="180" src="https://www.youtube.com/embed/videoseries?list=PLvRY7L7X3ytTcjI0zOqMHIt_v1cXhHBXd" frameborder="0" allowfullscreen></iframe>
+            <iframe id="frame-playlist-2" width="100%" height="180" src="https://www.youtube.com/embed/videoseries?list=PLCk95CAcxmRwTJEUflt4ylx5KMM6ag0pl" frameborder="0" allowfullscreen></iframe>
         </div>
 
         <button onclick="togglePartners()" class="btn-link btn-partners">
@@ -486,11 +503,14 @@
     <div id="modal-store-front" class="modal-admin-overlay">
         <div class="admin-card" style="border-color: var(--color-partners); box-shadow: 0 0 25px rgba(0, 255, 170, 0.25);">
             <div class="admin-card-title partner-head" id="txt-modal-store-name">Nome da Loja</div>
+            
             <div class="store-products-wrap" id="store-products-render-zone"></div>
+            
             <div class="cart-summary-bar">
                 <span class="cart-total-txt">Total do Carrinho:</span>
                 <span class="cart-total-val" id="txt-cart-total-value">R$ 0,00</span>
             </div>
+
             <div id="checkout-form-zone" style="margin-top:12px; display:none; border-top:1px dashed #444; padding-top:10px;">
                 <div class="input-admin-group"><label>Seu Nome Completo</label><input type="text" id="client-name" placeholder="Ex: César Alberto"></div>
                 <div class="input-admin-group"><label>Endereço de Entrega (Rua, Número, Bairro)</label><input type="text" id="client-address" placeholder="Ex: Rua Santa Mariana, 500"></div>
@@ -499,7 +519,8 @@
                     <select id="client-payment"><option value="PIX">PIX</option><option value="Dinheiro">Dinheiro</option><option value="Cartão">Cartão de Crédito/Débito</option></select>
                 </div>
             </div>
-            <button class="btn-admin-panel" style="background:var(--color-partners); color:#000; font-weight:bold;" id="btn-main-cart-action" onclick="avancarCarrinhoOuEnviar()">Ver Carrinho / Finalizar</button>
+
+            <button class="btn-admin-panel btn-admin-primary" style="background:var(--color-partners); color:#000; font-weight:bold;" id="btn-main-cart-action" onclick="avancarCarrinhoOuEnviar()">Ver Carrinho / Finalizar</button>
             <button class="btn-admin-panel btn-admin-cancel" onclick="fecharModalStoreFront()">Fechar</button>
         </div>
     </div>
@@ -524,6 +545,7 @@
     <div id="modal-panel-admin" class="modal-admin-overlay">
         <div class="admin-card" style="border-color: #00ffaa; box-shadow: 0 0 30px rgba(0, 255, 170, 0.3);">
             <div class="admin-card-title partner-head"><i class="fas fa-sliders-h"></i> Painel R1AMOBI</div>
+            
             <div style="font-size: 11px; color:#00ffaa; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">📝 Customização de Nome da Página</div>
             <div class="input-admin-group"><label>Nome Parte 1 (Vermelho)</label><input type="text" id="adm-text-r1" placeholder="Ex: R1"></div>
             <div class="input-admin-group"><label>Nome Parte 2 (Branco)</label><input type="text" id="adm-text-amobi" placeholder="Ex: AMOBI"></div>
@@ -537,14 +559,27 @@
                     <option value="invisivel">Ocultar/Ficar Invisível</option>
                 </select>
             </div>
-            <div class="input-admin-group"><label>URL da Imagem da Publi (Postimages)</label><input type="text" id="adm-publi-img" placeholder="https://i.postimg.cc/..."></div>
-            <div class="input-admin-group"><label>Link de Destino ao Clicar (WhatsApp ou Site)</label><input type="text" id="adm-publi-link" placeholder="https://wa.me/..."></div>
+            <div class="input-admin-group">
+                <label>URL da Imagem da Publi (Postimages)</label>
+                <input type="text" id="adm-publi-img" placeholder="https://i.postimg.cc/">
+            </div>
+            <div class="input-admin-group">
+                <label>Link de Destino ao Clicar (WhatsApp ou Site)</label>
+                <input type="text" id="adm-publi-link" placeholder="https://wa.me/...">
+            </div>
 
             <div style="font-size: 11px; color:#00ffaa; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:10px;">🎨 Cores de Layout (Neon)</div>
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:15px;">
-                <div class="input-admin-group" style="margin:0;"><label>Neon R1 (Vermelho)</label><input type="color" id="adm-color-r1" onchange="atualizarEstilosLayout()"></div>
-                <div class="input-admin-group" style="margin:0;"><label>Neon Parceiros</label><input type="color" id="adm-color-part" onchange="atualizarEstilosLayout()"></div>
+                <div class="input-admin-group" style="margin:0;">
+                    <label>Neon R1 (Vermelho)</label>
+                    <input type="color" id="adm-color-r1" onchange="atualizarEstilosLayout()">
+                </div>
+                <div class="input-admin-group" style="margin:0;">
+                    <label>Neon Parceiros</label>
+                    <input type="color" id="adm-color-part" onchange="atualizarEstilosLayout()">
+                </div>
             </div>
+
             <div class="input-admin-group">
                 <label>Estilo do Plano de Fundo (Template)</label>
                 <select id="adm-bg-style" onchange="atualizarEstilosLayout()">
@@ -564,8 +599,16 @@
             <div class="input-admin-group"><label>Link da Imagem do Banner (Postimages)</label><input type="text" id="banner-new-url" placeholder="https://i.postimg.cc/..."></div>
             <div class="input-admin-group"><label>Link de Destino do Banner (WhatsApp, Site, Cardápio) - *Opcional</label><input type="text" id="banner-new-link" placeholder="https://i.postimg.cc/..."></div>
             <button class="btn-admin-panel" style="background:#00ffaa; color:#000; margin-bottom:15px;" onclick="salvarNovoBannerMemoria()">Adicionar Banner</button>
+
             <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">🗑️ Remover Banners Ativos</div>
             <div id="admin-banners-list-zone" style="margin-bottom:15px;"></div>
+
+            <div style="font-size: 11px; color:#bf00ff; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:15px;">📹 Gerenciador de Câmeras por Cidade</div>
+            <div class="input-admin-group"><label>Nome da Cidade</label><input type="text" id="cam-new-city" placeholder="Ex: Assis"></div>
+            <div class="input-admin-group"><label>Link Externo do Site da Câmera</label><input type="text" id="cam-new-url" placeholder="https://site-da-camera-da-cidade.com..."></div>
+            <button class="btn-admin-panel" style="background:#bf00ff; color:#fff; margin-bottom:15px;" onclick="adicionarNovaCameraAdmin()">Criar Botão de Câmera</button>
+            <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">🗑️ Remover Câmeras Ativas</div>
+            <div id="admin-cameras-list-zone" style="margin-bottom:15px;"></div>
 
             <div style="font-size: 11px; color:#00ffaa; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:15px;">➕ Criar Novo Botão de Link</div>
             <div class="input-admin-group"><label>Texto do Botão</label><input type="text" id="btn-new-text" placeholder="Ex: Siga no TikTok 🎥"></div>
@@ -584,10 +627,12 @@
                 </select>
             </div>
             <button class="btn-admin-panel" style="background:#00ffaa; color:#000; margin-bottom:15px;" onclick="salvarNovoBotaoManual()">Adicionar Botão Novo</button>
+
             <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">🗑️ Remover Botões Criados</div>
             <div id="admin-buttons-list-zone" style="margin-bottom:15px;"></div>
 
             <div style="font-size: 11px; color:#00ffaa; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:15px;" id="lbl-parceiro-admin-titulo">🤝 Cadastrar Novo Parceiro Comercial</div>
+            <input type="hidden" id="part-edit-index" value="-1">
             <div class="input-admin-group"><label>Nome Curto da Empresa</label><input type="text" id="part-new-name" placeholder="Ex: Concha Lanches"></div>
             <div class="input-admin-group">
                 <label>Tipo de Negócio</label>
@@ -601,34 +646,32 @@
             <button class="btn-admin-panel" style="background:#00ffaa; color:#000; margin-bottom:15px;" id="btn-salvar-parceiro-action" onclick="salvarNovoParceiro()">Inserir na Lista</button>
 
             <div style="font-size: 11px; color:#ffea00; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:15px;"><i class="fas fa-box-open"></i> Cadastrar Produtos no Lojista</div>
-            <div class="input-admin-group"><label>Selecione o Estabelecimento Comercial</label><select id="adm-prod-store-select" onchange="alimentarSeletorLojasNoAdmin()"></select></div>
+            <div class="input-admin-group"><label>Selecione o Estabelecimento Comercial</label><select id="adm-prod-store-select" onchange="renderizarListaProdutosNoAdmin()"></select></div>
             <div class="input-admin-group"><label>Nome do Produto / Item</label><input type="text" id="adm-prod-name" placeholder="Ex: X-Salada Monstro / Camiseta Streetwear"></div>
             <div class="input-admin-group"><label>Preço de Venda (Use ponto, não vírgula)</label><input type="text" id="adm-prod-price" placeholder="Ex: 24.90"></div>
             <div class="input-admin-group"><label>Descrição Opcional</label><input type="text" id="adm-prod-desc" placeholder="Ex: Hambúrguer 150g, queijo cheddar, maionese..."></div>
             <div class="input-admin-group"><label>Foto do Produto (Link Postimages) - *Opcional</label><input type="text" id="adm-prod-img" placeholder="https://i.postimg.cc/..."></div>
             <button class="btn-admin-panel" style="background:#ffea00; color:#000; margin-bottom:15px; font-weight:bold;" onclick="salvarNovoProdutoNoLojista()">Adicionar Produto no Catálogo</button>
+
             <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">🗑️ Remover Produtos Ativos</div>
             <div id="admin-products-list-zone" style="margin-bottom:15px;"></div>
 
             <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-top:15px; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:15px;">⚙️ Remover Parceiros Ativos</div>
             <div id="admin-partners-list-zone"></div>
 
-            <button class="btn-admin-panel btn-admin-primary" onclick="aplicarEGravarTudo()">Gravar Tudo e Reiniciar</button>
+            <button class="btn-admin-panel btn-admin-primary" style="background:#00ffaa; color:#000; font-weight:900; margin-top:20px;" onclick="aplicarEGravarTudo()">Gravar Tudo e Reiniciar</button>
             <button class="btn-admin-panel btn-admin-cancel" onclick="fecharPainelAdmin()">Sair Execução</button>
         </div>
     </div>
 
-    <div class="footer">
-        <strong>R1AMOBI - Conectando Destinos</strong><br>
-        Plataforma Tecnológica de Mobilidade & Logística<br>
-        Assis - SP<br>
-        
-        <a id="lnk-footer-signature" href="https://wa.me/5518998165086?text=Ol%C3%A1!%20Vi%20o%20projeto%20desenvolvido%20por%20voc%C3%AA%20e%20gostaria%20de%20receber%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20cria%C3%A7%C3%A3o%20de%20uma%20p%C3%A1gina%2C%20site%20ou%20sistema%20semehlante%20para%20meu%20neg%C3%B3cio." target="_blank" style="color: #666; text-decoration: none; font-size: 0.72rem; display: inline-block; margin-top: 10px; font-weight: 500; letter-spacing: 0.5px; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.color='var(--color-partners)'; this.style.textShadow='0 0 8px var(--color-partners)';" onmouseout="this.style.color='#666'; this.style.textShadow='none';">
+<div class="footer">
+        <strong>R1AMOBI</strong> - Conectando Destinos<br>Plataforma Tecnológica de Mobilidade & Logística<br>Assis - SP
+        <br>
+        <a id="lnk-footer-signature" href="https://wa.me/5518998165086?text=Ol%C3%A1!%20Vi%20o%20projeto%20desenvolvido%20por%20voc%C3%AA%20e%20gostaria%20de%20receber%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20cria%C3%A7%C3%A3o%20de%20uma%20p%C3%A1gina%2C%20site%20ou%20sistema%20semelhante%20para%20meu%20neg%C3%B3cio." target="_blank" style="color: #666; text-decoration: none; font-size: 0.72rem; display: inline-block; margin-top: 10px; font-weight: 500; letter-spacing: 0.5px; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.color='var(--color-partners)'; this.style.textShadow='0 0 8px var(--color-partners)';" onmouseout="this.style.color='#666'; this.style.textShadow='none';">
             MC Studio ⚡
         </a>
-
-        <div style="margin-top: 12px; margin-bottom: 5px;">
-            <a href="termos.html" style="color: #666666; font-size: 0.78rem; text-decoration: none; font-weight: bold; letter-spacing: 0.5px; transition: all 0.3s ease;" onmouseover="this.style.color='#ff0000'; this.style.textShadow='0 0 8px #ff0000';" onmouseout="this.style.color='#666666'; this.style.textShadow='none';">
+        <div style="margin-top: 10px; margin-bottom: 5px;">
+            <a href="termos.html" style="color: #666666; font-size: 0.78rem; text-decoration: none; font-weight: bold; letter-spacing: 0.5px;">
                 Termos de Uso
             </a>
         </div>
@@ -648,16 +691,32 @@
     </a>
 
     <script>
-        let mapboxToken = 'pk.eyJ1IjoiY3NhcmZ6MjAyNiIsImEiOiJjbWtzdmVsOGQxankwM2ZxOHRwdHdzano1In0.K2SeoTgcXUH8-2X1emEMBA';
+        // --- CHAVE DE CONFIGURAÇÃO REAL DO FIREBASE ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyBQsg4KT2DVwYHAWJv_EhrahbJ_JMYkWwU",
+            authDomain: "bio-r1amobi.firebaseapp.com",
+            databaseURL: "https://bio-r1amobi-default-rtdb.firebaseio.com",
+            projectId: "bio-r1amobi",
+            storageBucket: "bio-r1amobi.firebasestorage.app",
+            messagingSenderId: "1063600967220",
+            appId: "1:1063600967220:web:1de7e9dfdb8374a7670461"
+        };
+        
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        const databaseR1 = firebase.database();
 
-        let categoriaSelecionada = "", pagamentoSelecionado = "", contagemCliquesLogo = 0, timerResetCliques, intervaloRotacaoBannersElement, bannerIndexAtivoGlobal = 0, animationFrameId;
+        let categoriaSelecionada = "", pagamentoSelecionado = "", contagemCliquesLogo = 0, timerResetCliques, capturadorEventoInstalacaoPWA, intervaloRotacaoBannersElement, bannerIndexAtivoGlobal = 0, animationFrameId;
         let particles = [], stars = [], comets = [];
+
         let lojaAtivaIndexGlobal = null;
         let carrinhoItensAtuais = [];
-        let distanciaCalculadaKm = 0, valorCalculadoTotal = 0;
+        
+        let distanciaCalculadaKm = 0;
+        let valorCalculadoTotal = 0;
+        let mapboxToken = 'pk.eyJ1IjoiY3NhcmZ6MjAyNiIsImEiOiJjbWtzdmVsOGQxankwM2ZxOHRwdHdzano1In0.K2SeoTgcXUH8-2X1emEMBA';
 
         const CONFIG_DEFAULT = {
-            colorR1: "#ff0000", colorCalc: "#ffea00", colorPartners: "#00ffaa", bgStyle: "asfalto", textR1: "R1", textAmobi: "AMOBI", textFooter: "MC Studio ⚡", publiStatus: "invisivel", publiImg: "https://via.placeholder.com/380x200?text=Sua+Publicidade+Aqui", publiLink: "https://wa.me/5518998165086", imgLogo: "https://i.postimg.cc/rpmHFjBL/file-0000000067d8720e8c1a5a8dc1ba4445-2.jpg", bannersList: [{ url: "https://i.postimg.cc/wT09x32h/IMG-20260607-WA0004.jpg", link: "", clicks: 0 }], playlist1: "PLvRY7L7X3ytTcjI0zOqMHIt_v1cXhHBXd", playlist2: "PLCk95CAcxmRwTJEUflt4ylx5KMM6ag0pl", botoesManuais: [], produtosList: {}, pioneiro: [], parceiros: []
+            colorR1: "#ff0000", colorCalc: "#ffea00", colorPartners: "#00ffaa", bgStyle: "asfalto", textR1: "R1", textAmobi: "AMOBI", textFooter: "MC Studio ⚡", publiStatus: "invisivel", publiImg: "https://via.placeholder.com/380x200?text=Sua+Publicidade+Aqui", publiLink: "https://wa.me/5518998165086", imgLogo: "https://i.postimg.cc/rpmHFjBL/file-0000000067d8720e8c1a5a8dc1ba4445-2.jpg", bannersList: [{ url: "https://i.postimg.cc/wT09x32h/IMG-20260607-WA0004.jpg", link: "", clicks: 0 }], playlist1: "PLvRY7L7X3ytTcjI0zOqMHIt_v1cXhHBXd", playlist2: "PLCk95CAcxmRwTJEUflt4ylx5KMM6ag0pl", botoesManuais: [], produtosList: {}, parceiros: [], listaCamerasLocais: []
         };
 
         let appConfig = JSON.parse(localStorage.getItem('R1_APP_DYNAMIC_CONFIG')) || CONFIG_DEFAULT;
@@ -666,7 +725,7 @@
         function desativarSplashScreen() { const splash = document.getElementById('splash-screen'); if (splash) { splash.style.opacity = '0'; setTimeout(() => { splash.style.display = 'none'; }, 400); } }
 
         try { inicializarConfiguracoesDinamicas(); } catch(e){}
-        setTimeout(desativarSplashScreen, 1500);
+        setTimeout(desativarSplashScreen, 1200);
 
         databaseR1.ref('R1_APP_DYNAMIC_CONFIG').on('value', (snapshot) => {
             const dadosBanco = snapshot.val();
@@ -675,6 +734,7 @@
                 appConfig.bannersList = obterComoArray(appConfig.bannersList);
                 appConfig.botoesManuais = obterComoArray(appConfig.botoesManuais);
                 appConfig.parceiros = obterComoArray(appConfig.parceiros);
+                appConfig.listaCamerasLocais = obterComoArray(appConfig.listaCamerasLocais);
                 if (!appConfig.produtosList) appConfig.produtosList = {};
                 localStorage.setItem('R1_APP_DYNAMIC_CONFIG', JSON.stringify(appConfig));
                 try { inicializarConfiguracoesDinamicas(); } catch(e){}
@@ -715,17 +775,9 @@
                 const info = dados.USDBRL; const valor = parseFloat(info.bid).toFixed(2).replace('.', ','); const variacao = parseFloat(info.pctChange).toFixed(2); document.getElementById('txt-dollar-value').innerText = valor; const percentEl = document.getElementById('txt-dollar-percent'); const iconEl = document.getElementById('txt-dollar-icon');
                 if(parseFloat(variacao) >= 0) { percentEl.innerText = `+${variacao}%`; percentEl.style.color = '#25d366'; iconEl.className = "fas fa-arrow-alt-circle-up"; iconEl.style.color = "#25d366"; } else { percentEl.innerText = `${variacao}%`; percentEl.style.color = '#ff3333'; iconEl.className = "fas fa-arrow-alt-circle-down"; iconEl.style.color = "#ff3333"; }
             }).catch(() => {});
-            
-            // ✅ CORREÇÃO DATA E PREVISÃO EM TEMPO REAL CONJUGADOS
-            document.getElementById("txt-data-atual").innerText = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-            
-            fetch('https://api.open-meteo.com/v1/forecast?latitude=-22.6622&longitude=-50.4178&current_weather=true').then(res => res.json()).then(dados => {
-                const clima = dados.current_weather;
-                document.getElementById('txt-widget-temp').innerText = Math.round(clima.temperature);
-                const descClima = clima.weathercode === 0 ? "CÉU LIMPO / SOL ☀️" : "SINAL ESTÁVEL 🛰️";
-                const diasSemanaFrases = ["Domingo de rota ativa. Fé na caminhada e acelerador consciente! 🏁", "Segunda-feira bruta! Semana começando, foca no progresso e marcha nas entregas! 🏍️💨", "Terça-feira de elite! Moto revisada e asfalto quente. Destino traçado com sucesso! 🔥", "Quarta-feira de ritmo forte! Meio da semana, o corre não para e a R1 voa baixo! 🚀", "Quinta-feira de alta performance! Foco no objetivo, cada entrega é um passo pro topo! 🛡️", "Sexta-feira estralando! Fim de semana colado, acelera com responsabilidade no asfalto! ⚡", "Sábado de pique total! Dia de pico na cidade, corre ágil e certeiro é aqui! 🏍️📦"];
-                document.getElementById("txt-frase-clima").innerText = `${descClima} — ${diasSemanaFrases[new Date().getDay()]}`;
-            }).catch(() => {});
+            fetch('https://wttr.in/Assis?format=j1').then(res => res.json()).then(dados => {
+                const condicao = dados.current_condition[0]; const astronomia = dados.weather[0].astronomy[0]; document.getElementById('txt-widget-temp').innerText = condicao.temp_C; if (astronomia && astronomia.sunset) { document.getElementById('txt-widget-sunset').innerText = astronomia.sunset; } else { document.getElementById('txt-widget-sunset').innerText = "5:47 PM"; } const chanceChuva = dados.weather[0].hourly[0].chanceofrain; document.getElementById('txt-widget-rain').innerHTML = `<i class="fas fa-cloud-rain"></i> ${chanceChuva}% Chuva`;
+            }).catch(() => { document.getElementById('txt-widget-sunset').innerText = "5:47 PM"; });
         }
 
         function abrirModalLojistaCarrinho(index) {
@@ -811,6 +863,7 @@
                         </div>`;
                 });
             }
+            renderizarCamerasFronte();
         }
 
         function registrarCliqueSecreto() { contagemCliquesLogo++; clearTimeout(timerResetCliques); if (contagemCliquesLogo >= 7) { contagemCliquesLogo = 0; document.getElementById('modal-login-admin').style.display = 'flex'; } else { timerResetCliques = setTimeout(() => { contagemCliquesLogo = 0; }, 2000); } }
@@ -844,7 +897,7 @@
         function abrirPainelAdmin() {
             document.getElementById('adm-text-r1').value = appConfig.textR1 || "R1"; document.getElementById('adm-text-amobi').value = appConfig.textAmobi || "AMOBI"; document.getElementById('adm-text-footer').value = appConfig.textFooter || "MC Studio ⚡"; document.getElementById('adm-color-r1').value = appConfig.colorR1 || '#ff0000'; document.getElementById('adm-color-part').value = appConfig.colorPartners || '#00ffaa'; document.getElementById('adm-img-logo').value = appConfig.imgLogo || ''; document.getElementById('adm-bg-style').value = appConfig.bgStyle || "asfalto";
             document.getElementById('adm-publi-status').value = appConfig.publiStatus || "invisivel"; document.getElementById('adm-publi-img').value = appConfig.publiImg || ""; document.getElementById('adm-publi-link').value = appConfig.publiLink || "";
-            alimentarSeletorLojasNoAdmin(); renderizerListaDeRemocaoBanners(); renderizerListaDeRemocaoParceiros(); renderizerListaDeRemocaoBotoes();
+            alimentarSeletorLojasNoAdmin(); renderizerListaDeRemocaoBanners(); renderizerListaDeRemocaoParceiros(); renderizerListaDeRemocaoBotoes(); renderizarListaCamerasAdmin();
             document.getElementById('modal-panel-admin').style.display = 'flex';
         }
         function fecharPainelAdmin() { document.getElementById('modal-panel-admin').style.display = 'none'; }
@@ -855,16 +908,6 @@
         }
         function salvarNovoBannerMemoria() { const url = document.getElementById('banner-new-url').value.trim(); const link = document.getElementById('banner-new-link').value.trim(); if(!url) return; appConfig.bannersList.push({ url, link }); document.getElementById('banner-new-url').value = ""; renderizerListaDeRemocaoBanners(); }
         function deletarBannerMemoria(idx) { if(appConfig.bannersList.length <= 1) return; appConfig.bannersList.splice(idx, 1); renderizerListaDeRemocaoBanners(); }
-
-        // ✅ REFINAMENTO TOTAL DA GRAVAÇÃO SEM ERRO E RETORNO SEGURO
-        function aplicarEGravarTudo() {
-            try {
-                appConfig.textR1 = document.getElementById('adm-text-r1').value.trim(); appConfig.textAmobi = document.getElementById('adm-text-amobi').value.trim(); appConfig.textFooter = document.getElementById('adm-text-footer').value.trim(); appConfig.colorR1 = document.getElementById('adm-color-r1').value; appConfig.colorPartners = document.getElementById('adm-color-part').value; appConfig.bgStyle = document.getElementById('adm-bg-style').value; appConfig.imgLogo = document.getElementById('adm-img-logo').value.trim(); appConfig.publiStatus = document.getElementById('adm-publi-status').value; appConfig.publiImg = document.getElementById('adm-publi-img').value.trim(); appConfig.publiLink = document.getElementById('adm-publi-link').value.trim();
-                localStorage.setItem('R1_APP_DYNAMIC_CONFIG', JSON.stringify(appConfig));
-                databaseR1.ref('R1_APP_DYNAMIC_CONFIG').set(appConfig);
-                fecharPainelAdmin(); inicializarConfiguracoesDinamicas();
-            } catch (err) { alert("Erro ao sincronizar nuvem: " + err.message); }
-        }
 
         function renderizerListaDeRemocaoBotoes() {
             const zone = document.getElementById('admin-buttons-list-zone'); zone.innerHTML = "";
@@ -880,9 +923,10 @@
         function salvarNovoParceiro() { const name = document.getElementById('part-new-name').value.trim(); const img = document.getElementById('part-new-img').value.trim(); const url = document.getElementById('part-new-link').value.trim(); const type = document.getElementById('part-new-type').value; if(!name || !img || !url) return; appConfig.parceiros.push({ name, img, url, type }); document.getElementById('part-new-name').value = ""; document.getElementById('part-new-img').value = ""; document.getElementById('part-new-link').value = ""; renderizerListaDeRemocaoParceiros(); alimentarSeletorLojasNoAdmin(); }
         function deletarParceiroMemoria(index) { appConfig.parceiros.splice(index, 1); renderizerListaDeRemocaoParceiros(); alimentarSeletorLojasNoAdmin(); }
 
-        function togglePartners() { var box = document.getElementById("partners-box"); box.style.display = (box.style.display === "none" || box.style.display === "") ? "block" : "none"; }
-        function toggleCalc() { var box = document.getElementById("calc-box"); box.style.display = (box.style.display === "none" || box.style.display === "") ? "block" : "none"; }
-        function togglePlayer() { var p = document.getElementById("video-player"); p.style.display = (p.style.display === "none" || p.style.display === "") ? "flex" : "none"; }
+        function togglePartners() { var box = document.getElementById("partners-box"); box.style.display = box.style.display === "none" ? "block" : "none"; }
+        function toggleCalc() { var box = document.getElementById("calc-box"); box.style.display = box.style.display === "none" ? "block" : "none"; }
+        function togglePlayer() { var p = document.getElementById("video-player"); p.style.display = p.style.display === "none" ? "flex" : "none"; }
+        function toggleCameras() { var box = document.getElementById("cameras-box"); box.style.display = box.style.display === "none" ? "block" : "none"; }
 
         function selectCat(n, id) { categoriaSelecionada = n; document.querySelectorAll('#calc-box .custom-selector:nth-of-type(1) .select-option').forEach(e => e.classList.remove('selected')); document.getElementById(id).classList.add('selected'); validarForm(); }
         function selectPag(n, id) { pagamentoSelecionado = n; document.querySelectorAll('#calc-box .custom-selector:nth-of-type(2) .select-option').forEach(e => e.classList.remove('selected')); document.getElementById(id).classList.add('selected'); document.getElementById("campoPix").style.display = n==="PIX"?"block":"none"; document.getElementById("campoTroco").style.display = n==="Dinheiro"?"block":"none"; validarForm(); }
@@ -924,12 +968,87 @@
             const gmapsLink = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(de)}&destination=${encodeURIComponent(para)}&travelmode=driving`;
             let textoZap = `*NOVO ORÇAMENTO PARTICULAR R1AMOBI*\n\n*Nome:* ${nome}\n*WhatsApp Cliente:* ${whats}\n*Categoria:* ${categoriaSelecionada}\n*Origem:* ${de}\n*Destino:* ${para}\n*Forma de Pagamento:* ${pagamentoSelecionado}\n`;
             if(pagamentoSelecionado === 'Dinheiro') textoZap += `*Troco:* ${troco}\n`;
-            textoZap += `*Valor Estimado:* R$ ${valorCalculadoTotal > 0 ? valorCalculadoTotal.toFixed(2) : 'A combinar'}`;
-            textoZap += `\n\n*Link do Roteiro Google Maps:*\n${gmapsLink}`;
+            textoZap += `*Valor Estimado:* R$ ${valorCalculadoTotal > 0 ? valorCalculadoTotal.toFixed(2) : 'A combinar'}\n\n*Link do Roteiro Google Maps:*\n${gmapsLink}`;
             window.open(`https://wa.me/5518998165086?text=${encodeURIComponent(textoZap)}`, '_blank');
         }
 
-        window.addEventListener('load', () => { atualizarAPIsPublicasWidgets(); });
+        function renderizarCamerasFronte() {
+            const container = document.getElementById('dinamic-cameras-container'); if(!container) return; container.innerHTML = '';
+            const lista = appConfig.listaCamerasLocais || [];
+            if (lista.length === 0) { container.innerHTML = `<div style="font-size:11px; text-align:center; color:#888; width:100%; padding:15px 0;">Nenhuma câmera cadastrada no painel.</div>`; renderizarListaCamerasAdmin(); return; }
+            lista.forEach(c => {
+                if(c.status === 'visivel') {
+                    const btn = document.createElement('button'); btn.className = 'btn-camera-city';
+                    btn.innerHTML = `<span><i class="fas fa-video"></i> ${c.cidade} ao vivo</span> <span class="camera-status-dot"></span>`;
+                    btn.onclick = () => window.open(c.url, '_blank'); container.appendChild(btn);
+                }
+            });
+            renderizarListaCamerasAdmin();
+        }
+
+        function renderizarListaCamerasAdmin() {
+            const zone = document.getElementById('admin-cameras-list-zone'); if(!zone) return; zone.innerHTML = '';
+            const lista = appConfig.listaCamerasLocais || [];
+            lista.forEach((c, idx) => {
+                const row = document.createElement('div'); row.className = 'admin-partner-row'; row.style.padding = '10px';
+                row.innerHTML = `<span>${c.cidade} (${c.status})</span><div><button onclick="alternarStatusCameraAdmin(${idx})" style="background:#ffea00; border:none; padding:4px 8px; font-size:10px; border-radius:4px; margin-right:4px; cursor:pointer;">Pausar</button><button onclick="deletarCameraAdmin(${idx})" style="background:#ff3333; color:#fff; border:none; padding:4px 8px; font-size:10px; border-radius:4px; cursor:pointer;">Deletar</button></div>`;
+                zone.appendChild(row);
+            });
+        }
+        
+        function adicionarNovaCameraAdmin() {
+            const city = document.getElementById('cam-new-city').value.trim(); const url = document.getElementById('cam-new-url').value.trim();
+            if(!city || !url) return alert('Preencha os campos da câmera!');
+            if(!appConfig.listaCamerasLocais) appConfig.listaCamerasLocais = [];
+            appConfig.listaCamerasLocais.push({ cidade: city, url: url, status: 'visivel' });
+            document.getElementById('cam-new-city').value = ''; document.getElementById('cam-new-url').value = ''; renderizarCamerasFronte();
+        }
+        function alternarStatusCameraAdmin(idx) { 
+            if(appConfig.listaCamerasLocais[idx]) {
+                appConfig.listaCamerasLocais[idx].status = appConfig.listaCamerasLocais[idx].status === 'visivel' ? 'pausado' : 'visivel';
+                renderizarCamerasFronte();
+            }
+        }
+        function deletarCameraAdmin(idx) { 
+            if(appConfig.listaCamerasLocais) {
+                appConfig.listaCamerasLocais.splice(idx, 1);
+                renderizarCamerasFronte();
+            }
+        }
+
+        function aplicarEGravarTudo() {
+            try {
+                appConfig.textR1 = document.getElementById('adm-text-r1').value.trim(); appConfig.textAmobi = document.getElementById('adm-text-amobi').value.trim(); appConfig.textFooter = document.getElementById('adm-text-footer').value.trim(); appConfig.colorR1 = document.getElementById('adm-color-r1').value; appConfig.colorPartners = document.getElementById('adm-color-part').value; appConfig.bgStyle = document.getElementById('adm-bg-style').value; appConfig.imgLogo = document.getElementById('adm-img-logo').value.trim(); appConfig.publiStatus = document.getElementById('adm-publi-status').value; appConfig.publiImg = document.getElementById('adm-publi-img').value.trim(); appConfig.publiLink = document.getElementById('adm-publi-link').value.trim();
+                localStorage.setItem('R1_APP_DYNAMIC_CONFIG', JSON.stringify(appConfig));
+                databaseR1.ref('R1_APP_DYNAMIC_CONFIG').set(appConfig);
+                fecharPainelAdmin(); inicializarConfiguracoesDinamicas(); alert("Configurações e Câmeras salvas com sucesso na Nuvem!");
+            } catch (err) { alert("Erro ao salvar: " + err.message); }
+        }
+
+        function carregarClimaEData() {
+            document.getElementById("txt-data-atual").innerText = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+            const diasSemanaFrases = ["Domingo de rota ativa. Fé na caminhada e acelerador consciente! 🏁", "Segunda-feira bruta! Semana começando, foca no progresso e marcha nas entregas! 🏍️💨", "Terça-feira de elite! Moto revisada e asfalto quente. Destino traçado com sucesso! 🔥", "Quarta-feira de ritmo forte! Meio da semana, o corre não para e a R1 voa baixo! 🚀", "Quinta-feira de alta performance! Foco no objetivo, cada entrega é um passo pro topo! 🛡️", "Sexta-feira estralando! Fim de semana colado, acelera com responsabilidade no asfalto! ⚡", "Sábado de pique total! Dia de pique na cidade, corre ágil e certeiro é aqui! 🏍️📦"];
+            let fraseDoDiaMotivacional = diasSemanaFrases[new Date().getDay()];
+            fetch(`https://wttr.in/Assis?format=j1`).then(res => res.json()).then(dados => {
+                const descClima = dados.current_condition[0].lang_pt[0].value; document.getElementById("txt-frase-clima").innerText = `${descClima.toUpperCase()} — ${fraseDoDiaMotivacional}`;
+            }).catch(() => { document.getElementById("txt-frase-clima").innerText = `CORRE ATIVO — ${fraseDoDiaMotivacional}`; });
+        }
+
+        function fecharModalLogin() { document.getElementById('modal-login-admin').style.display = 'none'; }
+        function fecharModalStoreFront() { document.getElementById('modal-store-front').style.display = 'none'; }
+        function compartilharAppGeral() { alert('Compartilhando link do app R1AMOBI...'); }
+        function acionarInstalacaoPWA() { alert('Instalando aplicativo...'); }
+        
+        function compartilharLojistaIndividual(name, phone) { 
+            const msg = `Confira a loja de *${name}* no R1AMOBI App! Peça online direto pelo catálogo do WhatsApp: https://wa.me/${phone}`; 
+            if(navigator.share) { 
+                navigator.share({ title: `Parceiro R1AMOBI - ${name}`, text: msg, url: location.href }).catch(() => {}); 
+            } else { 
+                alert(msg); 
+            } 
+        }
+
+        window.addEventListener('load', () => { carregarClimaEData(); });
         let currentItem = 0; setInterval(() => { const items = document.querySelectorAll('.carousel-item'); if(items.length) { items[currentItem].classList.remove('active'); currentItem = (currentItem + 1) % items.length; items[currentItem].classList.add('active'); } }, 3000);
         window.addEventListener('resize', () => { gerenciarSistemaDeFundoAtivo(); });
     </script>
