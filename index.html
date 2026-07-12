@@ -14,8 +14,11 @@
     <title id="page-title">R1AMOBI - Conectando Destinos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
+    <!-- Scripts Firebase e Mapbox GL JS -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
 
     <style>
         /* --- ARQUETIPO DE CORES DINÂMICAS (VARS) --- */
@@ -119,7 +122,7 @@
         }
         .super-publi-img { width: 100%; display: block; object-fit: cover; }
 
-        /* CONTAINER ROTATIVO DE BANNERS COM SETAS DE NAVEGAÇÃO PROFISSIONAIS */
+        /* CONTAINER ROTATIVO DE BANNERS */
         .banner-carousel-wrapper {
             width: 100%; max-width: 380px; position: relative; margin-bottom: 20px;
             border-radius: 12px; overflow: hidden; box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); border: 1px solid #333;
@@ -148,7 +151,7 @@
             border: 2px solid transparent; cursor: pointer; color: white; width: 100%; box-sizing: border-box;
         }
 
-        /* --- CORES NEON ORIGINAIS DIRECIONADAS --- */
+        /* --- CORES NEON --- */
         .btn-google-play { color: #00f2ff; border-color: #00f2ff; box-shadow: 0 0 10px rgba(0, 242, 255, 0.3); }
         .btn-google-play:hover { background: #00f2ff; color: #000; box-shadow: 0 0 30px #00f2ff; }
         
@@ -201,7 +204,6 @@
             font-size: 0.75rem; font-weight: bold; color: #fff; letter-spacing: 0.5px; text-transform: uppercase;
         }
 
-        /* ÍCONE DE COMPARTILHAR PARCEIRO INDIVIDUAL */
         .btn-share-partner {
             background: rgba(0,0,0,0.8); border: 1px solid var(--color-partners); color: var(--color-partners);
             width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -236,7 +238,6 @@
         }
         .btn-add-cart:active { transform: scale(0.95); }
 
-        /* ÁREA FIXA DE RESUMO DO CARRINHO INTERNO */
         .cart-summary-bar {
             display: flex; justify-content: space-between; align-items: center; background: #111; border-top: 1px solid #333; margin-top: 15px; padding-top: 12px;
         }
@@ -268,7 +269,33 @@
 
         #obs-pagamento { font-size: 10px; color: #ff0000; font-weight: bold; text-align: center; margin: 10px 0; display: block; }
         #video-player { display: none; margin-top: 10px; width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #bf00ff; }
-        .footer { margin-top: 50px; font-size: 0.8rem; color: #888; text-align: center; line-height: 1.5; letter-spacing: 1px; margin-bottom: 90px; }
+        
+        /* ✅ SEÇÃO DE ÁREA DE COBERTURA COM MAPA E ÍCONE PERSONALIZADO */
+        .cobertura-container {
+            width: 100%; max-width: 380px; background: rgba(10, 10, 10, 0.85);
+            border: 1px solid var(--color-r1); border-radius: 15px; padding: 15px;
+            margin-top: 20px; margin-bottom: 10px; box-sizing: border-box; backdrop-filter: blur(5px);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
+        }
+        .cobertura-title { font-size: 0.85rem; font-weight: bold; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .cobertura-title i { color: var(--color-r1); }
+        .cobertura-text { font-size: 0.75rem; color: #ccc; line-height: 1.4; margin-bottom: 10px; }
+        #mapbox-cobertura-map { width: 100%; height: 160px; border-radius: 10px; border: 1px solid #222; background: #000; }
+
+        /* ESTILO DO MARCADOR DE MOTO INDEPENDENTE NO MAPA */
+        .moto-marker {
+            font-size: 20px;
+            color: #ff0000;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+            animation: bounceMarker 1s infinite alternate;
+            cursor: pointer;
+        }
+        @keyframes bounceMarker {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-6px); }
+        }
+
+        .footer { margin-top: 30px; font-size: 0.8rem; color: #888; text-align: center; line-height: 1.5; letter-spacing: 1px; margin-bottom: 90px; }
 
         /* --- SINALIZADOR VISUAL DE MODAIS INTERNOS --- */
         .modal-admin-overlay {
@@ -300,10 +327,13 @@
         .admin-partner-row { display: flex; align-items: center; justify-content: space-between; background: #1c1c1c; padding: 10px; border-radius: 8px; margin-bottom: 8px; border: 1px solid #333; gap: 8px; color: white; font-size: 12px; }
         .admin-partner-row img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
         
-        /* BOTÕES DE ORDENAÇÃO NO PAINEL ADMIN */
         .admin-order-controls { display: flex; gap: 4px; }
         .btn-order-move { background: #333; color: #fff; border: 1px solid #555; padding: 4px 6px; font-size: 10px; border-radius: 4px; cursor: pointer; }
         .btn-order-move:active { background: #ff0000; border-color: #ff0000; }
+
+        /* ✅ TEXTO ROBUSTO E COMPLETO DOS TERMOS DE USO */
+        .card-termos-body { font-size: 0.82rem; line-height: 1.6; color: #ccc; text-align: justify; padding-right: 5px; }
+        .card-termos-body h3 { font-size: 0.95rem; color: #ffffff; margin-top: 20px; margin-bottom: 8px; border-bottom: 1px solid #333; padding-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
 
         /* --- FAIXA AMARELA AD SENSE RESTAURADA NO PADRÃO ORIGINAL --- */
         .adsense-footer {
@@ -425,7 +455,7 @@
                     </div>
                     <div class="select-option" id="cat-entrega" onclick="selectCat('Serviço de Entrega (Urbano)', 'cat-entrega')">
                         <div class="option-header">
-                            <span><i class="fas fa-box"></i> Servicio de Entrega (Urbano)</span>
+                            <span><i class="fas fa-box"></i> Serviço de Entrega (Urbano)</span>
                             <small style="color:#ffea00;">R$ 8,00 Mín.</small>
                         </div>
                     </div>
@@ -518,19 +548,24 @@
         <div id="partners-box">
             <div class="partners-horizontal-container" id="dinamic-partners-container"></div>
         </div>
+        
+        <!-- ÁREA DE COBERTURA COM MAPA E MARCADOR DE MOTO INDEPENDENTE -->
+        <div class="cobertura-container">
+            <div class="cobertura-title"><i class="fas fa-map-marked-alt"></i> ◎ Área de Cobertura</div>
+            <div class="cobertura-text">Disponível para operações completas em <strong>Assis e Região</strong> com total agilidade e monitoramento.</div>
+            <div id="mapbox-cobertura-map"></div>
+        </div>
     </div>
 
+    <!-- MODAIS -->
     <div id="modal-store-front" class="modal-admin-overlay">
         <div class="admin-card" style="border-color: var(--color-partners); box-shadow: 0 0 25px rgba(0, 255, 170, 0.25);">
             <div class="admin-card-title partner-head" id="txt-modal-store-name">Nome da Loja</div>
-            
             <div class="store-products-wrap" id="store-products-render-zone"></div>
-            
             <div class="cart-summary-bar">
                 <span class="cart-total-txt">Total do Carrinho:</span>
                 <span class="cart-total-val" id="txt-cart-total-value">R$ 0,00</span>
             </div>
-
             <div id="checkout-form-zone" style="margin-top:12px; display:none; border-top:1px dashed #444; padding-top:10px;">
                 <div class="input-admin-group"><label>Seu Nome Completo</label><input type="text" id="client-name" placeholder="Ex: César Alberto"></div>
                 <div class="input-admin-group"><label>Endereço de Entrega (Rua, Número, Bairro)</label><input type="text" id="client-address" placeholder="Ex: Rua Santa Mariana, 500"></div>
@@ -539,9 +574,31 @@
                     <select id="client-payment"><option value="PIX">PIX</option><option value="Dinheiro">Dinheiro</option><option value="Cartão">Cartão de Crédito/Débito</option></select>
                 </div>
             </div>
-
             <button class="btn-admin-panel btn-admin-primary" style="background:var(--color-partners); color:#000; font-weight:bold;" id="btn-main-cart-action" onclick="avancarCarrinhoOuEnviar()">Ver Carrinho / Finalizar</button>
             <button class="btn-admin-panel btn-admin-cancel" onclick="fecharModalStoreFront()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- ✅ MODAL INTERNO COM TERMOS DE USO ROBUSTOS E COMPLETOS -->
+    <div id="modal-termos-uso" class="modal-admin-overlay">
+        <div class="admin-card" style="border-color: #ffffff; box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);">
+            <div class="admin-card-title" style="color: #fff; border-bottom: 1px solid #333;"><i class="fas fa-file-contract"></i> Termos de Uso</div>
+            <div class="card-termos-body">
+                <p>Seja bem-vindo à plataforma oficial da <strong>R1AMOBI</strong>. Ao acessar, navegar ou utilizar este aplicativo de link, você declara ter lido, compreendido e aceitado integralmente todos os termos, diretrizes e condições descritas neste documento regulamentador.</p>
+                
+                <h3><i class="fas fa-shield-alt" style="color:red; margin-right:6px;"></i> 1. Natureza da Plataforma</h3>
+                <p>A R1AMOBI opera estritamente como um hub tecnológico e ecossistema de soluções digitais voltado para a otimização de mobilidade urbana por motocicletas e gestão logística de entregas na cidade de Assis, São Paulo, e suas microrregiões conectadas.</p>
+                
+                <h3><i class="fas fa-motorcycle" style="color:red; margin-right:6px;"></i> 2. Diretrizes e Precificação de Corridas</h3>
+                <p>As solicitações de serviços gerenciadas por motoristas particulares ou mototaxistas autônomos integrados seguem uma tabela fixa municipal de partida com taxa mínima estabelecida em <strong>R$ 8,00</strong> para perímetros urbanos comerciais. Para deslocamentos intermunicipais de longa distância, o orçamento automático utiliza processamento de rotas com base no valor de <strong>R$ 2,00 por quilômetro rodado</strong>, ficando sob responsabilidade do cliente custos adicionais como pedágios oficiais da rota.</p>
+                
+                <h3><i class="fas fa-lock" style="color:red; margin-right:6px;"></i> 3. Políticas de Liberação e Confirmação</h3>
+                <p>Para manter o alto nível de segurança, eficiência no fluxo das ordens e proteção aos profissionais do asfalto, o acionamento de um motoka parceiro ou entregador particular em modo privado é condicionado estritamente à <strong>validação prévia e confirmação eletrônica do pagamento</strong> (seja via transferência Pix ou maquininha autorizada).</p>
+                
+                <h3><i class="fas fa-user-check" style="color:red; margin-right:6px;"></i> 4. Responsabilidade das Informações</h3>
+                <p>O preenchimento correto dos dados cadastrais, números de WhatsApp ativos e, principalmente, a especificação detalhada dos endereços completos de origem e destino nos campos do calculador integrado são de inteira responsabilidade do usuário contratante.</p>
+            </div>
+            <button class="btn-admin-panel btn-admin-cancel" style="width:100%; margin-top:15px;" onclick="fecharModalTermos()">Fechar Termos</button>
         </div>
     </div>
 
@@ -574,30 +631,15 @@
             <div style="font-size: 11px; color:#00ffaa; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:10px;">📣 Super Banner de Divulgação (Publi Maior)</div>
             <div class="input-admin-group">
                 <label>Status da Publi</label>
-                <select id="adm-publi-status">
-                    <option value="visivel">Exibir no Aplicativo</option>
-                    <option value="invisivel">Ocultar/Ficar Invisível</option>
-                </select>
+                <select id="adm-publi-status"><option value="visivel">Exibir no Aplicativo</option><option value="invisivel">Ocultar/Ficar Invisível</option></select>
             </div>
-            <div class="input-admin-group">
-                <label>URL da Imagem da Publi (Postimages)</label>
-                <input type="text" id="adm-publi-img" placeholder="https://i.postimg.cc/">
-            </div>
-            <div class="input-admin-group">
-                <label>Link de Destino ao Clicar (WhatsApp ou Site)</label>
-                <input type="text" id="adm-publi-link" placeholder="https://wa.me/...">
-            </div>
+            <div class="input-admin-group"><label>URL da Imagem da Publi (Postimages)</label><input type="text" id="adm-publi-img" placeholder="https://i.postimg.cc/"></div>
+            <div class="input-admin-group"><label>Link de Destino ao Clicar (WhatsApp ou Site)</label><input type="text" id="adm-publi-link" placeholder="https://wa.me/..."></div>
 
             <div style="font-size: 11px; color:#00ffaa; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:10px;">🎨 Cores de Layout (Neon)</div>
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:15px;">
-                <div class="input-admin-group" style="margin:0;">
-                    <label>Neon R1 (Vermelho)</label>
-                    <input type="color" id="adm-color-r1" onchange="atualizarEstilosLayout()">
-                </div>
-                <div class="input-admin-group" style="margin:0;">
-                    <label>Neon Parceiros</label>
-                    <input type="color" id="adm-color-part" onchange="atualizarEstilosLayout()">
-                </div>
+                <div class="input-admin-group" style="margin:0;"><label>Neon R1 (Vermelho)</label><input type="color" id="adm-color-r1" onchange="atualizarEstilosLayout()"></div>
+                <div class="input-admin-group" style="margin:0;"><label>Neon Parceiros</label><input type="color" id="adm-color-part" onchange="atualizarEstilosLayout()"></div>
             </div>
 
             <div class="input-admin-group">
@@ -656,10 +698,7 @@
             <div class="input-admin-group"><label>Nome Curto da Empresa</label><input type="text" id="part-new-name" placeholder="Ex: Concha Lanches"></div>
             <div class="input-admin-group">
                 <label>Tipo de Negócio</label>
-                <select id="part-new-type">
-                    <option value="cardapio">Cardápio (Lanchonete / Restaurante 🍕)</option>
-                    <option value="catalogo">Catálogo (Loja / Comércio Geral 📦)</option>
-                </select>
+                <select id="part-new-type"><option value="cardapio">Cardápio 🍕</option><option value="catalogo">Catálogo 📦</option></select>
             </div>
             <div class="input-admin-group"><label>Link da Logo Redonda (Postimages)</label><input type="text" id="part-new-img" placeholder="https://i.postimg.cc/..."></div>
             <div class="input-admin-group"><label>WhatsApp Comercial da Loja</label><input type="text" id="part-new-link" placeholder="Ex: 5518999999999"></div>
@@ -684,6 +723,7 @@
         </div>
     </div>
 
+    <!-- RODAPÉ DA CENTRAL -->
     <div class="footer">
         <strong>R1AMOBI</strong> - Conectando Destinos<br>Plataforma Tecnológica de Mobilidade & Logística<br>Assis - SP
         <br>
@@ -691,12 +731,13 @@
             MC Studio ⚡
         </a>
         <div style="margin-top: 10px; margin-bottom: 5px;">
-            <a href="termos.html" style="color: #666666; font-size: 0.78rem; text-decoration: none; font-weight: bold; letter-spacing: 0.5px;">
+            <a href="javascript:void(0)" onclick="abrirModalTermos()" style="color: #666666; font-size: 0.78rem; text-decoration: none; font-weight: bold; letter-spacing: 0.5px; cursor: pointer;">
                 Termos de Uso
             </a>
         </div>
     </div>
 
+    <!-- ADSENSE FIXED FOOTER -->
     <a href="https://moto-gear-copy-d32b3b77.base44.app" target="_blank" class="adsense-footer">
         <div class="ads-content">
             <i class="fas fa-motorcycle"></i>
@@ -734,6 +775,7 @@
         let distanciaCalculadaKm = 0;
         let valorCalculadoTotal = 0;
         let mapboxToken = 'pk.eyJ1IjoiY3NhcmZ6MjAyNiIsImEiOiJjbWtzdmVsOGQxankwM2ZxOHRwdHdzano1In0.K2SeoTgcXUH8-2X1emEMBA';
+        let mainMapObject = null;
 
         const CONFIG_DEFAULT = {
             colorR1: "#ff0000", colorCalc: "#ffea00", colorPartners: "#00ffaa", bgStyle: "asfalto", textR1: "R1", textAmobi: "AMOBI", textFooter: "MC Studio ⚡", publiStatus: "invisivel", publiImg: "https://via.placeholder.com/380x200?text=Sua+Publicidade+Aqui", publiLink: "https://wa.me/5518998165086", imgLogo: "https://i.postimg.cc/rpmHFjBL/file-0000000067d8720e8c1a5a8dc1ba4445-2.jpg", bannersList: [{ url: "https://i.postimg.cc/wT09x32h/IMG-20260607-WA0004.jpg", link: "", clicks: 0 }], playlist1: "PLvRY7L7X3ytTcjI0zOqMHIt_v1cXhHBXd", playlist2: "PLCk95CAcxmRwTJEUflt4ylx5KMM6ag0pl", botoesManuais: [], produtosList: {}, parceiros: [], listaCamerasLocais: []
@@ -742,7 +784,7 @@
         let appConfig = JSON.parse(localStorage.getItem('R1_APP_DYNAMIC_CONFIG')) || CONFIG_DEFAULT;
 
         function obterComoArray(obj) { if (!obj) return []; if (Array.isArray(obj)) return obj.filter(i => i !== null); return Object.keys(obj).sort((a,b)=>Number(a)-Number(b)).map(k => obj[k]).filter(i => i !== null); }
-        function desativarSplashScreen() { const splash = document.getElementById('splash-screen'); if (splash) { splash.style.opacity = '0'; setTimeout(() => { splash.style.display = 'none'; }, 400); } }
+        function desativarSplashScreen() { const splash = document.getElementById('splash-screen'); if (splash) { splash.style.opacity = '0'; setTimeout(() => { splash.style.display = 'none'; inicializarMapaCoberturaNativa(); }, 400); } }
 
         try { inicializarConfiguracoesDinamicas(); } catch(e){}
         setTimeout(desativarSplashScreen, 1200);
@@ -760,6 +802,33 @@
                 try { inicializarConfiguracoesDinamicas(); } catch(e){}
             }
         });
+
+        /* ✅ MAPA COMPLETO COM MARCADOR EM FORMATO DE MOTO EM ASSIS */
+        function inicializarMapaCoberturaNativa() {
+            if (mainMapObject) return;
+            mapboxgl.accessToken = mapboxToken;
+            mainMapObject = new mapboxgl.Map({
+                container: 'mapbox-cobertura-map',
+                style: 'mapbox://styles/mapbox/dark-v11',
+                center: [-50.4131, -22.6569],
+                zoom: 12,
+                pitch: 35
+            });
+            
+            mainMapObject.on('load', () => {
+                const elementoMoto = document.createElement('div');
+                elementoMoto.className = 'moto-marker';
+                elementoMoto.innerHTML = '<i class="fas fa-motorcycle"></i>';
+
+                new mapboxgl.Marker(elementoMoto)
+                    .setLngLat([-50.4131, -22.6569])
+                    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h4 style="color:#000;margin:0 0 4px 0;">Central R1AMOBI</h4><p style="color:#333;margin:0;">Base Operacional de Assis e Região.</p>'))
+                    .addTo(mainMapObject);
+            });
+        }
+
+        function abrirModalTermos() { document.getElementById('modal-termos-uso').style.display = 'flex'; }
+        function fecharModalTermos() { document.getElementById('modal-termos-uso').style.display = 'none'; }
 
         function gerenciarSistemaDeFundoAtivo() {
             cancelAnimationFrame(animationFrameId); const canvas = document.getElementById('bg-canvas'); if (!canvas) return; const ctx = canvas.getContext('2d'); canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -847,7 +916,6 @@
             if (appConfig.publiStatus === "visivel" && appConfig.publiImg) { document.getElementById('img-super-publi-source').src = appConfig.publiImg; blocoPubli.style.display = "block"; } else { blocoPubli.style.display = "none"; }
 
             gerenciarSistemaDeFundoAtivo(); atualizarAPIsPublicasWidgets();
-
             renderizarBannersNaTelaMudarQuadro();
 
             const btnZone = document.getElementById('custom-admin-buttons-zone');
@@ -877,7 +945,6 @@
             renderizarCamerasFronte();
         }
 
-        /* ✅ REPROGRAMAÇÃO DO COMPORTAMENTO DO CARROSSEL DE BANNERS */
         function renderizarBannersNaTelaMudarQuadro() {
             const bannerZone = document.getElementById('main-banners-carousel-zone');
             if(!bannerZone) return;
@@ -908,9 +975,9 @@
             const imagensBannersDom = document.querySelectorAll('#main-banners-carousel-zone .banner-amobi');
             if(imagensBannersDom.length > 1) {
                 intervaloRotacaoBannersElement = setInterval(() => {
-                    imagensBannersDom[bannerIndexAtivoGlobal].classList.remove('active');
+                    if(imagensBannersDom[bannerIndexAtivoGlobal]) imagensBannersDom[bannerIndexAtivoGlobal].classList.remove('active');
                     bannerIndexAtivoGlobal = (bannerIndexAtivoGlobal + 1) % imagensBannersDom.length;
-                    imagensBannersDom[bannerIndexAtivoGlobal].classList.add('active');
+                    if(imagensBannersDom[bannerIndexAtivoGlobal]) imagensBannersDom[bannerIndexAtivoGlobal].classList.add('active');
                 }, 5000);
             }
         }
@@ -951,7 +1018,6 @@
         }
         function fecharPainelAdmin() { document.getElementById('modal-panel-admin').style.display = 'none'; }
 
-        /* ✅ SISTEMA DE REORDENAÇÃO COMPLETA DOS ELEMENTOS NO PAINEL ADMIN */
         function reordenarItemListaConfig(tipo, index, direcao) {
             let listaTarget = [];
             if(tipo === 'banners') listaTarget = appConfig.bannersList;
@@ -1125,7 +1191,7 @@
 
         function carregarClimaEData() {
             document.getElementById("txt-data-atual").innerText = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-            const diasSemanaFrases = ["Domingo de rota ativa. Fé na caminhada e acelerador consciente! 🏁", "Segunda-feira bruta! Semana começando, foca no progresso e marcha nas entregas! 🏍️💨", "Terça-feira de elite! Moto revisada e asfalto quente. Destino traçado com sucesso! 🔥", "Quarta-feira de ritmo forte! Meio da semana, o corre não para e a R1 voa baixo! 🚀", "Quinta-feira de alta performance! Foco no objetivo, cada entrega é um passo pro topo! 🛡️", "Sexta-feira estralando! Fim de semana colado, acelera com responsabilidade no asfalto! ⚡", "Sábado de pique total! Dia de pico na cidade, corre ágil e certeiro é aqui! 🏍️📦"];
+            const diasSemanaFrases = ["Domingo de rota ativa. Fé na caminhada e acelerador consciente! 🏁", "Segunda-feira bruta! Semana começando, foca no progresso e marcha nas entregas! 🏍️💨", "Terça-feira de elite! Moto revisada e asfalto quente. Destino traçado com sucesso! 🔥", "Quarta-feira de ritmo forte! Meio da semana, o corre não para e a R1 voa baixo! 🚀", "Quinta-feira de alta performance! Foco no objective, cada entrega é um passo pro topo! 🛡️", "Sexta-feira estralando! Fim de semana colado, acelera com responsabilidade no asfalto! ⚡", "Sábado de pique total! Dia de pico na cidade, corre ágil e certeiro é aqui! 🏍️📦"];
             let fraseDoDiaMotivacional = diasSemanaFrases[new Date().getDay()];
             fetch(`https://wttr.in/Assis?format=j1`).then(res => res.json()).then(dados => {
                 const descClima = dados.current_condition[0].lang_pt[0].value; document.getElementById("txt-frase-clima").innerText = `${descClima.toUpperCase()} — ${fraseDoDiaMotivacional}`;
