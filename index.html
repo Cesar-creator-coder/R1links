@@ -11,7 +11,19 @@
     </script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">R1AMOBI - Conectando Destinos</title>
+    
+    <!-- ✅ INJEÇÃO DE PALAVRAS-CHAVES (SEO) PARA O GOOGLE ACHAR SEU APP EM ASSIS E REGIÃO -->
+    <title id="page-title">R1AMOBI - Conectando Destinos | Mototáxi e Moto Entrega em Assis SP</title>
+    <meta name="description" content="R1AMOBI - Plataforma Tecnológica de Mobilidade & Logística em Assis - SP. Chame mototaxista urbano, moto entrega, delivery e viagens intermunicipais pelo WhatsApp.">
+    <meta name="keywords" content="mototaxi assis, mototaxi assis sp, moto entrega assis, motoboy assis, motoboy sp, motoboy em assis sp, moto taxi perto de mi, diligencia em assis sp, correspondente juridico assis, diligencias empresariais assis, motoboy para cartorio assis, r1amobi">
+    <meta name="author" content="César Alberto - MC Studio">
+    
+    <!-- Meta tags para melhorar a exibição quando compartilhar no Facebook/WhatsApp -->
+    <meta property="og:title" content="R1AMOBI - Conectando Destinos | Assis - SP">
+    <meta property="og:description" content="Chame seu Mototáxi ou Moto Entrega em Assis e região com total agilidade.">
+    <meta property="og:image" content="https://i.postimg.cc/rpmHFjBL/file-0000000067d8720e8c1a5a8dc1ba4445-2.jpg">
+    <meta property="og:url" content="https://cesar-creator-coder.github.io/R1links/">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Scripts Firebase e Mapbox GL JS -->
@@ -27,7 +39,7 @@
             --color-calc: #ffea00;
             --color-partners: #00ffaa;
             --color-cameras: #bf00ff;
-            --color-comercio: #00ffee; /* Neon Ciano para Atração Comercial */
+            --color-comercio: #00ffee;
             --color-bg-panel: rgba(15, 15, 15, 0.98);
         }
 
@@ -66,7 +78,6 @@
             cursor: pointer; -webkit-user-select: none; user-select: none;
         }
 
-        /* BOTÃO DE COMPARTILHAR APP GERAL NO TOPO */
         .btn-share-top {
             position: absolute; right: 10px; top: 10px; background: rgba(0,0,0,0.6);
             border: 1px solid var(--color-r1); color: white; width: 40px; height: 40px;
@@ -75,7 +86,6 @@
         }
         .btn-share-top:active { transform: scale(0.9); box-shadow: 0 0 20px var(--color-r1); }
 
-        /* BOTÃO DINÂMICO DE INSTALAÇÃO PWA */
         #btn-pwa-install {
             display: none; width: 100%; max-width: 380px; padding: 12px; margin-bottom: 15px;
             background: rgba(0, 0, 0, 0.8); border: 2px dashed #00f2ff; color: #00f2ff;
@@ -90,7 +100,6 @@
         .tagline { font-size: 0.9rem; color: #ccc; margin-top: 5px; letter-spacing: 1px; }
         .category-text { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #777; margin-bottom: 15px; font-weight: bold; }
 
-        /* --- CARROSSEL HORIZONTAL DE WIDGETS --- */
         .widgets-scroll-container {
             width: 100%; max-width: 380px; display: flex; gap: 12px; overflow-x: auto;
             padding: 5px 0 15px 0; box-sizing: border-box; scrollbar-width: none;
@@ -106,7 +115,6 @@
         .widget-main-value { font-size: 1.25rem; font-weight: bold; display: flex; align-items: center; gap: 6px; }
         .widget-sub-value { font-size: 0.68rem; color: #888; display: flex; align-items: center; gap: 4px; }
 
-        /* DESIGN DO BLOCO DE DATA TRADICIONAL */
         .weather-container {
             width: 100%; max-width: 380px; background: rgba(10, 10, 10, 0.85);
             border: 1px solid var(--color-r1); border-radius: 15px; padding: 12px 15px;
@@ -115,7 +123,6 @@
         }
         .weather-phrase { font-size: 0.75rem; color: #aaa; font-style: italic; line-height: 1.3; border-top: 1px solid #222; padding-top: 5px; margin-top: 2px; }
 
-        /* SUPER BANNER DE PUBLI INDEPENDENTE */
         .super-publi-wrapper {
             width: 100%; max-width: 380px; margin-bottom: 20px; border-radius: 14px;
             overflow: hidden; border: 2px solid #333; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
@@ -123,7 +130,6 @@
         }
         .super-publi-img { width: 100%; display: block; object-fit: cover; }
 
-        /* CONTAINER ROTATIVO DE BANNERS */
         .banner-carousel-wrapper {
             width: 100%; max-width: 380px; position: relative; margin-bottom: 20px;
             border-radius: 12px; overflow: hidden; box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); border: 1px solid #333;
@@ -152,7 +158,6 @@
             border: 2px solid transparent; cursor: pointer; color: white; width: 100%; box-sizing: border-box;
         }
 
-        /* --- CORES NEON DIRECIONADAS --- */
         .btn-google-play { color: #00f2ff; border-color: #00f2ff; box-shadow: 0 0 10px rgba(0, 242, 255, 0.3); }
         .btn-google-play:hover { background: #00f2ff; color: #000; box-shadow: 0 0 30px #00f2ff; }
         
@@ -177,11 +182,9 @@
         .btn-cameras { color: var(--color-cameras); border-color: var(--color-cameras); box-shadow: 0 0 10px rgba(191, 0, 255, 0.2); }
         .btn-cameras:hover { background: var(--color-cameras); color: #fff; box-shadow: 0 0 30px var(--color-cameras); }
 
-        /* NOVO ESTILO: BOTÃO SEJA PARCEIRO COMÉRCIO */
         .btn-comercio { color: var(--color-comercio); border-color: var(--color-comercio); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
         .btn-comercio:hover { background: var(--color-comercio); color: #000; box-shadow: 0 0 30px var(--color-comercio); }
 
-        /* BOX DOS PARCEIROS HORIZONTAL SLIDER */
         #partners-box {
             display: none; width: 100%; background: rgba(10, 10, 10, 0.95);
             border: 1px solid var(--color-partners); border-radius: 20px; padding: 15px 10px; margin-top: -10px; margin-bottom: 15px; box-sizing: border-box;
@@ -216,7 +219,6 @@
         }
         .btn-share-partner:active { transform: scale(0.85); background: var(--color-partners); color: #000; }
 
-        /* BOX CÂMERAS AO VIVO */
         #cameras-box {
             display: none; width: 100%; background: rgba(10, 10, 10, 0.95);
             border: 1px solid var(--color-cameras); border-radius: 20px; padding: 20px; margin-top: -10px; margin-bottom: 15px; box-sizing: border-box;
@@ -249,7 +251,6 @@
         .cart-total-txt { font-size: 0.9rem; font-weight: bold; }
         .cart-total-val { color: var(--color-partners); font-weight: 900; }
 
-        /* --- DESIGN DO ORÇAMENTO PARTICULAR --- */
         #calc-box {
             display: none; width: 100%; background: rgba(10, 10, 10, 0.95);
             border: 1px solid var(--color-calc); border-radius: 20px; padding: 20px; margin-top: -10px; margin-bottom: 15px; box-sizing: border-box;
@@ -275,7 +276,6 @@
         #obs-pagamento { font-size: 10px; color: #ff0000; font-weight: bold; text-align: center; margin: 10px 0; display: block; }
         #video-player { display: none; margin-top: 10px; width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #bf00ff; }
         
-        /* --- SEÇÃO DE ÁREA DE COBERTURA --- */
         .cobertura-container {
             width: 100%; max-width: 380px; background: rgba(10, 10, 10, 0.85);
             border: 1px solid var(--color-r1); border-radius: 15px; padding: 15px;
@@ -296,7 +296,6 @@
 
         .footer { margin-top: 30px; font-size: 0.8rem; color: #888; text-align: center; line-height: 1.5; letter-spacing: 1px; margin-bottom: 90px; }
 
-        /* --- SINALIZADOR VISUAL DE MODAIS INTERNOS --- */
         .modal-admin-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
@@ -335,7 +334,6 @@
         .card-termos-body { font-size: 0.82rem; line-height: 1.6; color: #ccc; text-align: justify; padding-right: 5px; }
         .card-termos-body h3 { font-size: 0.95rem; color: #ffffff; margin-top: 20px; margin-bottom: 8px; border-bottom: 1px solid #333; padding-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- FAIXA AMARELA AD SENSE RESTAURADA NO PADRÃO ORIGINAL --- */
         .adsense-footer {
             position: fixed; bottom: 0; left: 0; width: 100%; height: 70px;
             background: #fff159; display: flex; align-items: center; justify-content: center;
@@ -373,7 +371,7 @@
         <div class="tagline" id="lbl-tagline-part">Conectando Destinos</div>
     </div>
 
-    <div class="category-text" id="lbl-categories-part">Mobilidade Urbana • Entregas • Tecnologia</div>
+    <div class="category-text" id="lbl-categories-part">Mobilidade Urbana • Entregas • Technology</div>
 
     <button id="btn-pwa-install" onclick="acionarInstalacaoPWA()">
         <i class="fas fa-download"></i> 📱 Instalar Aplicativo na Tela Inicial
@@ -433,7 +431,6 @@
             <i class="fab fa-google-play"></i> App Motoka Parceiro
         </a>
 
-        <!-- ✅ BOTÃO COMERCIAL: SEJA UM PARCEIRO COMENTADO -->
         <button onclick="abrirModalSejaParceiro()" class="btn-link btn-comercio">
             <i class="fas fa-store"></i> Cadastre sua Loja / Seja Parceiro
         </button>
@@ -554,7 +551,6 @@
             <div class="partners-horizontal-container" id="dinamic-partners-container"></div>
         </div>
         
-        <!-- ÁREA DE COBERTURA COM MAPA -->
         <div class="cobertura-container">
             <div class="cobertura-title"><i class="fas fa-map-marked-alt"></i> ◎ Área de Cobertura</div>
             <div class="cobertura-text">Disponível para operações completas em <strong>Assis e Região</strong> com total agilidade e monitoramento.</div>
@@ -584,7 +580,6 @@
         </div>
     </div>
 
-    <!-- ✅ NOVO MODAL INTERNO: FORMULÁRIO DE CADASTRO PARA NOVOS PARCEIROS (LOJISTAS) -->
     <div id="modal-seja-parceiro" class="modal-admin-overlay">
         <div class="admin-card" style="border-color: var(--color-comercio); box-shadow: 0 0 25px rgba(0, 242, 255, 0.25);">
             <div class="admin-card-title comercio-head"><i class="fas fa-store-alt"></i> Cadastre sua Loja</div>
@@ -620,7 +615,6 @@
         </div>
     </div>
 
-    <!-- MODAL TERMOS DE USO -->
     <div id="modal-termos-uso" class="modal-admin-overlay">
         <div class="admin-card" style="border-color: #ffffff; box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);">
             <div class="admin-card-title" style="color: #fff; border-bottom: 1px solid #333;"><i class="fas fa-file-contract"></i> Termos de Uso</div>
@@ -633,7 +627,7 @@
                 <h3><i class="fas fa-lock" style="color:red; margin-right:6px;"></i> 3. Políticas de Liberação e Confirmação</h3>
                 <p>Para manter o alto nível de segurança, eficiência no fluxo das ordens e proteção aos profissionais do asfalto, o acionamento de um motoka parceiro ou entregador particular em modo privado é condicionado estritamente à <strong>validação prévia e confirmação eletrônica do pagamento</strong> (seja via transferência Pix ou maquininha autorizada).</p>
                 <h3><i class="fas fa-user-check" style="color:red; margin-right:6px;"></i> 4. Responsabilidade das Informações</h3>
-                <p>O preenchimento correto dos dados cadastrais, números de WhatsApp ativos e, principalmente, a especificação detalhada dos endereços completos de origem e destino nos campos do calculador integrado são de inteira responsabilidade do usuário contratante.</p>
+                <p>O preenchimento correto dos dados cadastrais, numbers de WhatsApp ativos e, principalmente, a especificação detalhada dos endereços completos de origem e destino nos campos do calculador integrado são de inteira responsabilidade do usuário contratante.</p>
             </div>
             <button class="btn-admin-panel btn-admin-cancel" style="width:100%; margin-top:15px;" onclick="fecharModalTermos()">Fechar Termos</button>
         </div>
@@ -742,7 +736,7 @@
             <button class="btn-admin-panel" style="background:#00ffaa; color:#000; margin-bottom:15px;" id="btn-salvar-parceiro-action" onclick="salvarNovoParceiro()">Inserir na Lista</button>
 
             <div style="font-size: 11px; color:#ffea00; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:15px;"><i class="fas fa-box-open"></i> Cadastrar Produtos no Lojista</div>
-            <div class="input-admin-group"><label>Selecione o Extabelecimento Comercial</label><select id="adm-prod-store-select" onchange="renderizarListaProdutosNoAdmin()"></select></div>
+            <div class="input-admin-group"><label>Selecione o Estabelecimento Comercial</label><select id="adm-prod-store-select" onchange="renderizarListaProdutosNoAdmin()"></select></div>
             <div class="input-admin-group"><label>Nome do Produto / Item</label><input type="text" id="adm-prod-name" placeholder="Ex: X-Salada Monstro / Camiseta Streetwear"></div>
             <div class="input-admin-group"><label>Preço de Venda (Use ponto, não vírgula)</label><input type="text" id="adm-prod-price" placeholder="Ex: 24.90"></div>
             <div class="input-admin-group"><label>Descrição Opcional</label><input type="text" id="adm-prod-desc" placeholder="Ex: Hambúrguer 150g, queijo cheddar, maionese..."></div>
@@ -863,7 +857,6 @@
             });
         }
 
-        /* ✅ CONTROLES DOS NOVOS MODAIS COMERCIAIS */
         function abrirModalSejaParceiro() { document.getElementById('modal-seja-parceiro').style.display = 'flex'; }
         function fecharModalSejaParceiro() { document.getElementById('modal-seja-parceiro').style.display = 'none'; }
 
@@ -884,7 +877,6 @@
             window.open(`https://wa.me/5518998165086?text=${encodeURIComponent(textoComercialZap)}`, '_blank');
             fecharModalSejaParceiro();
             
-            // Limpa o formulário após enviar
             document.getElementById('comercio-nome-loja').value = "";
             document.getElementById('comercio-nome-responsavel').value = "";
             document.getElementById('comercio-whatsapp').value = "";
@@ -1255,7 +1247,7 @@
 
         function carregarClimaEData() {
             document.getElementById("txt-data-atual").innerText = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-            const diasSemanaFrases = ["Domingo de rota activa. Fé na caminhada e acelerador consciente! 🏁", "Segunda-feira bruta! Semana começando, foca no progresso e marcha nas entregas! 🏍️💨", "Terça-feira de elite! Moto revisada e asfalto quente. Destino traçado com sucesso! 🔥", "Quarta-feira de ritmo forte! Meio da semana, o corre não para e a R1 voa baixo! 🚀", "Quinta-feira de alta performance! Foco no objetivo, cada entrega é um passo pro topo! 🛡️", "Sexta-feira estralando! Fim de semana colado, acelera com responsabilidade no asfalto! ⚡", "Sábado de pique total! Dia de pique na cidade, corre ágil e certeiro é aqui! 🏍️📦"];
+            const diasSemanaFrases = ["Domingo de rota activa. Fé na caminhada e acelerador consciente! 🏁", "Segunda-feira bruta! Semana começando, foca no progresso e marcha nas entregas! 🏍️💨", "Terça-feira de elite! Moto revisada e asfalto quente. Destino traçado com sucesso! 🔥", "Quarta-feira de ritmo forte! Meio da semana, o corre não para e a R1 voa baixo! 🚀", "Quinta-feira de alta performance! Foco no objetivo, cada entrega é um passo pro topo! 🛡️", "Sexta-feira estralando! Fim de semana colado, acelera com responsabilidade no asfalto! ⚡", "Sábado de pique total! Dia de pico na cidade, corre ágil e certeiro é aqui! 🏍️📦"];
             let fraseDoDiaMotivacional = diasSemanaFrases[new Date().getDay()];
             fetch(`https://wttr.in/Assis?format=j1`).then(res => res.json()).then(dados => {
                 const descClima = dados.current_condition[0].lang_pt[0].value; document.getElementById("txt-frase-clima").innerText = `${descClima.toUpperCase()} — ${fraseDoDiaMotivacional}`;
