@@ -12,13 +12,11 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- ✅ INJEÇÃO DE PALAVRAS-CHAVES (SEO) PARA O GOOGLE ACHAR SEU APP EM ASSIS E REGIÃO -->
     <title id="page-title">R1AMOBI - Conectando Destinos | Mototáxi e Moto Entrega em Assis SP</title>
     <meta name="description" content="R1AMOBI - Plataforma Tecnológica de Mobilidade & Logística em Assis - SP. Chame mototaxista urbano, moto entrega, delivery e viagens intermunicipais pelo WhatsApp.">
-    <meta name="keywords" content="mototaxi assis, mototaxi assis sp, moto entrega assis, motoboy assis, motoboy sp, motoboy em assis sp, moto taxi perto de mi, diligencia em assis sp, correspondente juridico assis, diligencias empresariais assis, motoboy para cartorio assis, r1amobi">
-    <meta name="author" content="César Alberto - MC Studio">
+    <meta name="keywords" content="mototaxi assis, mototaxi assis sp, mototaxi perto de mi, moto entrega assis, motoboy assis, diligencia em assis sp, correspondente juridico assis, r1amobi">
+    <meta name="author" content="César Alberto Silvério - MC Studio">
     
-    <!-- Meta tags para melhorar a exibição quando compartilhar no Facebook/WhatsApp -->
     <meta property="og:title" content="R1AMOBI - Conectando Destinos | Assis - SP">
     <meta property="og:description" content="Chame seu Mototáxi ou Moto Entrega em Assis e região com total agilidade.">
     <meta property="og:image" content="https://i.postimg.cc/rpmHFjBL/file-0000000067d8720e8c1a5a8dc1ba4445-2.jpg">
@@ -26,7 +24,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Scripts Firebase e Mapbox GL JS -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
@@ -47,7 +44,7 @@
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000000; z-index: 99999; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; transition: opacity 0.4s ease-out, visibility 0.4s;
+            justify-content: center; align-items: center; transition: opacity 0.3s ease-out, visibility 0.3s;
         }
         .splash-logo {
             width: 180px; height: 180px; object-fit: contain;
@@ -126,9 +123,10 @@
         .super-publi-wrapper {
             width: 100%; max-width: 380px; margin-bottom: 20px; border-radius: 14px;
             overflow: hidden; border: 2px solid #333; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            display: none; cursor: pointer;
+            display: none; background: #000; position: relative;
         }
         .super-publi-img { width: 100%; display: block; object-fit: cover; }
+        .super-publi-video { width: 100%; max-height: 420px; display: block; object-fit: cover; border-radius: 12px; }
 
         .banner-carousel-wrapper {
             width: 100%; max-width: 380px; position: relative; margin-bottom: 20px;
@@ -276,6 +274,21 @@
         #obs-pagamento { font-size: 10px; color: #ff0000; font-weight: bold; text-align: center; margin: 10px 0; display: block; }
         #video-player { display: none; margin-top: 10px; width: 100%; border-radius: 12px; overflow: hidden; border: 1px solid #bf00ff; }
         
+        .stats-container {
+            width: 100%; max-width: 380px; background: rgba(10, 10, 10, 0.85);
+            border: 1px solid #333; border-radius: 15px; padding: 15px;
+            margin-top: 20px; box-sizing: border-box; backdrop-filter: blur(5px);
+            box-shadow: 0 0 15px rgba(255, 234, 0, 0.05); display: flex; flex-direction: column; gap: 12px;
+        }
+        .stats-title { font-size: 0.8rem; font-weight: bold; color: #aaa; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #222; padding-bottom: 6px; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; text-align: center; }
+        .stat-box { display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 10px; border: 1px solid #222; }
+        .stat-num { font-size: 1.15rem; font-weight: 900; letter-spacing: 0.5px; }
+        .stat-num.c-r1 { color: var(--color-r1); text-shadow: 0 0 8px rgba(255,0,0,0.4); }
+        .stat-num.c-calc { color: var(--color-calc); text-shadow: 0 0 8px rgba(255,234,0,0.4); }
+        .stat-num.c-part { color: var(--color-partners); text-shadow: 0 0 8px rgba(0,255,170,0.4); }
+        .stat-desc { font-size: 0.65rem; color: #777; font-weight: bold; margin-top: 4px; text-transform: uppercase; line-height: 1.2; }
+
         .cobertura-container {
             width: 100%; max-width: 380px; background: rgba(10, 10, 10, 0.85);
             border: 1px solid var(--color-r1); border-radius: 15px; padding: 15px;
@@ -331,9 +344,6 @@
         .btn-order-move { background: #333; color: #fff; border: 1px solid #555; padding: 4px 6px; font-size: 10px; border-radius: 4px; cursor: pointer; }
         .btn-order-move:active { background: #ff0000; border-color: #ff0000; }
 
-        .card-termos-body { font-size: 0.82rem; line-height: 1.6; color: #ccc; text-align: justify; padding-right: 5px; }
-        .card-termos-body h3 { font-size: 0.95rem; color: #ffffff; margin-top: 20px; margin-bottom: 8px; border-bottom: 1px solid #333; padding-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
-
         .adsense-footer {
             position: fixed; bottom: 0; left: 0; width: 100%; height: 70px;
             background: #fff159; display: flex; align-items: center; justify-content: center;
@@ -371,7 +381,7 @@
         <div class="tagline" id="lbl-tagline-part">Conectando Destinos</div>
     </div>
 
-    <div class="category-text" id="lbl-categories-part">Mobilidade Urbana • Entregas • Technology</div>
+    <div class="category-text" id="lbl-categories-part">Mobilidade Urbana • Entregas • Tecnologia</div>
 
     <button id="btn-pwa-install" onclick="acionarInstalacaoPWA()">
         <i class="fas fa-download"></i> 📱 Instalar Aplicativo na Tela Inicial
@@ -412,8 +422,8 @@
         <div id="txt-frase-clima" class="weather-phrase">Sincronizando radares de Assis...</div>
     </div>
 
-    <div class="super-publi-wrapper" id="block-super-publi" onclick="cliqueSuperPubliLinkZone()">
-        <img src="" class="super-publi-img" id="img-super-publi-source">
+    <div class="super-publi-wrapper" id="block-super-publi">
+        <div id="super-publi-media-render-zone"></div>
     </div>
 
     <div class="banner-carousel-wrapper">
@@ -551,6 +561,24 @@
             <div class="partners-horizontal-container" id="dinamic-partners-container"></div>
         </div>
         
+        <div class="stats-container">
+            <div class="stats-title"><i class="fas fa-chart-line"></i> 📊 Nosso Corre em Números</div>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span class="stat-num c-r1" id="stat-entregas" data-target="5840">0</span>
+                    <span class="stat-desc">Corre Realizado</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num c-calc" id="stat-km" data-target="12450">0</span>
+                    <span class="stat-desc">Km Rodado</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num c-part" id="stat-clientes" data-target="860">0</span>
+                    <span class="stat-desc">Clientes Atendidos</span>
+                </div>
+            </div>
+        </div>
+
         <div class="cobertura-container">
             <div class="cobertura-title"><i class="fas fa-map-marked-alt"></i> ◎ Área de Cobertura</div>
             <div class="cobertura-text">Disponível para operações completas em <strong>Assis e Região</strong> com total agilidade e monitoramento.</div>
@@ -558,7 +586,6 @@
         </div>
     </div>
 
-    <!-- MODAIS DO APP -->
     <div id="modal-store-front" class="modal-admin-overlay">
         <div class="admin-card" style="border-color: var(--color-partners); box-shadow: 0 0 25px rgba(0, 255, 170, 0.25);">
             <div class="admin-card-title partner-head" id="txt-modal-store-name">Nome da Loja</div>
@@ -627,7 +654,7 @@
                 <h3><i class="fas fa-lock" style="color:red; margin-right:6px;"></i> 3. Políticas de Liberação e Confirmação</h3>
                 <p>Para manter o alto nível de segurança, eficiência no fluxo das ordens e proteção aos profissionais do asfalto, o acionamento de um motoka parceiro ou entregador particular em modo privado é condicionado estritamente à <strong>validação prévia e confirmação eletrônica do pagamento</strong> (seja via transferência Pix ou maquininha autorizada).</p>
                 <h3><i class="fas fa-user-check" style="color:red; margin-right:6px;"></i> 4. Responsabilidade das Informações</h3>
-                <p>O preenchimento correto dos dados cadastrais, numbers de WhatsApp ativos e, principalmente, a especificação detalhada dos endereços completos de origem e destino nos campos do calculador integrado são de inteira responsabilidade do usuário contratante.</p>
+                <p>O preenchimento correto dos dados cadastrais, números de WhatsApp ativos e, principalmente, a especificação detalhada dos endereços completos de origem e destino nos campos do calculador integrado são de inteira responsabilidade do usuário contratante.</p>
             </div>
             <button class="btn-admin-panel btn-admin-cancel" style="width:100%; margin-top:15px;" onclick="fecharModalTermos()">Fechar Termos</button>
         </div>
@@ -659,12 +686,17 @@
             <div class="input-admin-group"><label>Nome Parte 2 (Branco)</label><input type="text" id="adm-text-amobi" placeholder="Ex: AMOBI"></div>
             <div class="input-admin-group"><label>Texto da Assinatura do Rodapé</label><input type="text" id="adm-text-footer" placeholder="Ex: MC Studio ⚡"></div>
 
-            <div style="font-size: 11px; color:#00ffaa; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:10px;">📣 Super Banner de Divulgação (Publi Maior)</div>
+            <div style="font-size: 11px; color:#00ffaa; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:10px;">📣 Super Banner de Divulgação (Imagem ou Vídeo)</div>
             <div class="input-admin-group">
                 <label>Status da Publi</label>
                 <select id="adm-publi-status"><option value="visivel">Exibir no Aplicativo</option><option value="invisivel">Ocultar/Ficar Invisível</option></select>
             </div>
-            <div class="input-admin-group"><label>URL da Imagem da Publi (Postimages)</label><input type="text" id="adm-publi-img" placeholder="https://i.postimg.cc/"></div>
+            <div class="input-admin-group">
+                <label>Tipo de Mídia do Banner</label>
+                <select id="adm-publi-type" onchange="alternarCamposMidiaAdmin()"><option value="imagem">Imagem Estática</option><option value="video">Vídeo Vertical 9:16 (.mp4)</option></select>
+            </div>
+            <div class="input-admin-group" id="zona-link-imagem"><label>URL da Imagem da Publi (Postimages)</label><input type="text" id="adm-publi-img" placeholder="https://i.postimg.cc/..."></div>
+            <div class="input-admin-group" id="zona-link-video" style="display:none;"><label>Link Direto do Vídeo Vertical .mp4</label><input type="text" id="adm-publi-video" placeholder="https://seu-servidor.com/video.mp4"></div>
             <div class="input-admin-group"><label>Link de Destino ao Clicar (WhatsApp ou Site)</label><input type="text" id="adm-publi-link" placeholder="https://wa.me/..."></div>
 
             <div style="font-size: 11px; color:#00ffaa; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:10px;">🎨 Cores de Layout (Neon)</div>
@@ -703,24 +735,6 @@
             <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">🗑️ Remover Câmeras Ativas</div>
             <div id="admin-cameras-list-zone" style="margin-bottom:15px;"></div>
 
-            <div style="font-size: 11px; color:#00ffaa; font-weight:bold; margin-bottom:10px; text-transform:uppercase; border-top:1px solid #333; padding-top:15px;">➕ Criar Novo Botão de Link</div>
-            <div class="input-admin-group"><label>Texto do Botão</label><input type="text" id="btn-new-text" placeholder="Ex: Siga no TikTok 🎥"></div>
-            <div class="input-admin-group"><label>Link de Destino</label><input type="text" id="btn-new-url" placeholder="https://..."></div>
-            <div class="input-admin-group">
-                <label>Cor do Estilo Neon</label>
-                <select id="btn-new-color">
-                    <option value="#00f2ff">Neon Azul Celeste</option>
-                    <option value="#ff007f">Neon Rosa Choque</option>
-                    <option value="#bf00ff">Neon Roxo Fritador</option>
-                    <option value="#25d366">Neon Verde Cardápio</option>
-                    <option value="#ffea00">Neon Amarelo Ouro</option>
-                    <option value="#ff6a00">Neon Laranja Brabo 🔥</option>
-                    <option value="#00ffee">Neon Ciano Elétrico ⚡</option>
-                    <option value="#ffffff">Neon Branco Puro 🏳️</option>
-                </select>
-            </div>
-            <button class="btn-admin-panel" style="background:#00ffaa; color:#000; margin-bottom:15px;" onclick="salvarNovoBotaoManual()">Adicionar Botão Novo</button>
-
             <div style="font-size: 11px; color:#ff3333; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">🗑️ Reordenar & Remover Botões Criados</div>
             <div id="admin-buttons-list-zone" style="margin-bottom:15px;"></div>
 
@@ -754,7 +768,6 @@
         </div>
     </div>
 
-    <!-- RODAPÉ -->
     <div class="footer">
         <strong>R1AMOBI</strong> - Conectando Destinos<br>Plataforma Tecnológica de Mobilidade & Logística<br>Assis - SP
         <br>
@@ -768,7 +781,6 @@
         </div>
     </div>
 
-    <!-- ADSENSE FIXED FOOTER -->
     <a href="https://moto-gear-copy-d32b3b77.base44.app" target="_blank" class="adsense-footer">
         <div class="ads-content">
             <i class="fas fa-motorcycle"></i>
@@ -809,16 +821,28 @@
         let mainMapObject = null;
 
         const CONFIG_DEFAULT = {
-            colorR1: "#ff0000", colorCalc: "#ffea00", colorPartners: "#00ffaa", bgStyle: "asfalto", textR1: "R1", textAmobi: "AMOBI", textFooter: "MC Studio ⚡", publiStatus: "invisivel", publiImg: "https://via.placeholder.com/380x200?text=Sua+Publicidade+Aqui", publiLink: "https://wa.me/5518998165086", imgLogo: "https://i.postimg.cc/rpmHFjBL/file-0000000067d8720e8c1a5a8dc1ba4445-2.jpg", bannersList: [{ url: "https://i.postimg.cc/wT09x32h/IMG-20260607-WA0004.jpg", link: "", clicks: 0 }], playlist1: "PLvRY7L7X3ytTcjI0zOqMHIt_v1cXhHBXd", playlist2: "PLCk95CAcxmRwTJEUflt4ylx5KMM6ag0pl", botoesManuais: [], produtosList: {}, parceiros: [], listaCamerasLocais: []
+            colorR1: "#ff0000", colorCalc: "#ffea00", colorPartners: "#00ffaa", bgStyle: "asfalto", textR1: "R1", textAmobi: "AMOBI", textFooter: "MC Studio ⚡", publiStatus: "invisivel", publiType: "imagem", publiImg: "https://via.placeholder.com/380x200?text=Sua+Publicidade+Aqui", publiVideo: "", publiLink: "https://wa.me/5518998165086", imgLogo: "https://i.postimg.cc/rpmHFjBL/file-0000000067d8720e8c1a5a8dc1ba4445-2.jpg", bannersList: [{ url: "https://i.postimg.cc/wT09x32h/IMG-20260607-WA0004.jpg", link: "", clicks: 0 }], playlist1: "PLvRY7L7X3ytTcjI0zOqMHIt_v1cXhHBXd", playlist2: "PLCk95CAcxmRwTJEUflt4ylx5KMM6ag0pl", botoesManuais: [], produtosList: {}, parceiros: [], listaCamerasLocais: []
         };
 
         let appConfig = JSON.parse(localStorage.getItem('R1_APP_DYNAMIC_CONFIG')) || CONFIG_DEFAULT;
 
         function obterComoArray(obj) { if (!obj) return []; if (Array.isArray(obj)) return obj.filter(i => i !== null); return Object.keys(obj).sort((a,b)=>Number(a)-Number(b)).map(k => obj[k]).filter(i => i !== null); }
-        function desativarSplashScreen() { const splash = document.getElementById('splash-screen'); if (splash) { splash.style.opacity = '0'; setTimeout(() => { splash.style.display = 'none'; inicializarMapaCoberturaNativa(); }, 400); } }
+        
+        function desativarSplashScreen() { 
+            const splash = document.getElementById('splash-screen'); 
+            if (splash) { 
+                splash.style.opacity = '0'; 
+                setTimeout(() => { 
+                    splash.style.display = 'none'; 
+                    setTimeout(inicializarMapaCoberturaNativa, 100);
+                    setTimeout(animarContadoresDeEstatistica, 200);
+                    setTimeout(atualizarAPIsPublicasWidgets, 300);
+                }, 300); 
+            } 
+        }
 
         try { inicializarConfiguracoesDinamicas(); } catch(e){}
-        setTimeout(desativarSplashScreen, 1200);
+        setTimeout(desativarSplashScreen, 800);
 
         databaseR1.ref('R1_APP_DYNAMIC_CONFIG').on('value', (snapshot) => {
             const dadosBanco = snapshot.val();
@@ -857,6 +881,20 @@
             });
         }
 
+        function animarContadoresDeEstatistica() {
+            const contadores = [{ id: 'stat-entregas', prefix: '+' }, { id: 'stat-km', prefix: '+' }, { id: 'stat-clientes', prefix: '+' }];
+            contadores.forEach(c => {
+                const el = document.getElementById(c.id); if(!el) return;
+                const alvo = parseInt(el.getAttribute('data-target')); let valorAtual = 0;
+                const velocidadeIncremento = Math.ceil(alvo / 40);
+                const temporizador = setInterval(() => {
+                    valorAtual += velocidadeIncremento;
+                    if(valorAtual >= alvo) { valorAtual = alvo; clearInterval(temporizador); }
+                    el.innerText = c.prefix + valorAtual.toLocaleString('pt-BR');
+                }, 25);
+            });
+        }
+
         function abrirModalSejaParceiro() { document.getElementById('modal-seja-parceiro').style.display = 'flex'; }
         function fecharModalSejaParceiro() { document.getElementById('modal-seja-parceiro').style.display = 'none'; }
 
@@ -867,20 +905,10 @@
             const seg = document.getElementById('comercio-segmento').value;
             const local = document.getElementById('comercio-localizacao').value.trim();
 
-            if(!loja || !resp || !whats || !local) {
-                alert("Por favor, preencha todos os campos do formulário para análise!");
-                return;
-            }
-
+            if(!loja || !resp || !whats || !local) { alert("Por favor, preencha todos os campos do formulário para análise!"); return; }
             const textoComercialZap = `🤝 *NOVA SOLICITAÇÃO DE PARCERIA COMERCIAL* 🤝\n\n🏢 *Nome da Loja:* ${loja}\n👤 *Responsável:* ${resp}\n📱 *WhatsApp:* ${whats}\n📊 *Segmento:* ${seg}\n📍 *Localização:* ${local}\n\n📢 _Desejo cadastrar meu estabelecimento e produtos para vender no ecossistema R1AMOBI. Aguardo retorno para liberação do painel!_`;
-            
-            window.open(`https://wa.me/5518998165086?text=${encodeURIComponent(textoComercialZap)}`, '_blank');
-            fecharModalSejaParceiro();
-            
-            document.getElementById('comercio-nome-loja').value = "";
-            document.getElementById('comercio-nome-responsavel').value = "";
-            document.getElementById('comercio-whatsapp').value = "";
-            document.getElementById('comercio-localizacao').value = "";
+            window.open(`https://wa.me/5518998165086?text=${encodeURIComponent(textoComercialZap)}`, '_blank'); fecharModalSejaParceiro();
+            document.getElementById('comercio-nome-loja').value = ""; document.getElementById('comercio-nome-responsavel').value = ""; document.getElementById('comercio-whatsapp').value = ""; document.getElementById('comercio-localizacao').value = "";
         }
 
         function abrirModalTermos() { document.getElementById('modal-termos-uso').style.display = 'flex'; }
@@ -956,9 +984,17 @@
                 let total = 0; let relacaoProdutosText = "";
                 carrinhoItensAtuais.forEach((i) => { total += parseFloat(i.price); relacaoProdutosText += `▪️ ${i.name} - R$ ${parseFloat(i.price).toFixed(2).replace('.',',')}\n`; });
                 const mapsLink = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(address + " Assis SP");
+                
+                /* ✅ CORREÇÃO CRÍTICA DO CÓDIGO DA VARIÁVEL UNIFICADA (FIM DA TRAVA DA SPLASH SCREEN) */
                 const msgLojistaText = `🏁 *NOVO PEDIDO DIGITAL - VIA HUB QMOBI* 🏁\n\n👤 *Cliente:* ${nome}\n📍 *Entrega:* ${address}\n💳 *Pagamento:* ${pay}\n\n🛒 *Relação de Itens:*\n${relacaoProdutosText}\n💰 *Valor Total:* R$ ${total.toFixed(2).replace('.',',')}\n\n🗺️ *Rota de Entrega Maps:*\n${mapsLink}\n\n⚡ _Pedido intermediado com total agilidade pela R1AMOBI._`;
                 window.open(`https://wa.me/${lojista.url}?text=${encodeURIComponent(msgLojistaText)}`, '_blank'); fecharModalStoreFront();
             }
+        }
+
+        function alternarCamposMidiaAdmin() {
+            const tipo = document.getElementById('adm-publi-type').value;
+            document.getElementById('zona-link-imagem').style.display = tipo === 'imagem' ? 'block' : 'none';
+            document.getElementById('zona-link-video').style.display = tipo === 'video' ? 'block' : 'none';
         }
 
         function inicializarConfiguracoesDinamicas() {
@@ -969,9 +1005,18 @@
             document.getElementById('lbl-r1-part').innerText = appConfig.textR1 || "R1"; document.getElementById('lbl-amobi-part').innerText = appConfig.textAmobi || "AMOBI"; document.getElementById('lnk-footer-signature').innerText = appConfig.textFooter || "MC Studio ⚡";
 
             const blocoPubli = document.getElementById('block-super-publi');
-            if (appConfig.publiStatus === "visivel" && appConfig.publiImg) { document.getElementById('img-super-publi-source').src = appConfig.publiImg; blocoPubli.style.display = "block"; } else { blocoPubli.style.display = "none"; }
+            const renderZone = document.getElementById('super-publi-media-render-zone');
+            if (appConfig.publiStatus === "visivel" && renderZone) {
+                blocoPubli.style.display = "block";
+                let tipoMidia = appConfig.publiType || "imagem";
+                if (tipoMidia === "video" && appConfig.publiVideo) {
+                    renderZone.innerHTML = `<video class="super-publi-video" autoplay muted loop playsinline src="${appConfig.publiVideo}" onclick="cliqueSuperPubliLinkZone()"></video>`;
+                } else if (appConfig.publiImg) {
+                    renderZone.innerHTML = `<img src="${appConfig.publiImg}" class="super-publi-img" onclick="cliqueSuperPubliLinkZone()">`;
+                }
+            } else if(blocoPubli) { blocoPubli.style.display = "none"; }
 
-            gerenciarSistemaDeFundoAtivo(); atualizarAPIsPublicasWidgets();
+            gerenciarSistemaDeFundoAtivo();
             renderizarBannersNaTelaMudarQuadro();
 
             const btnZone = document.getElementById('custom-admin-buttons-zone');
@@ -988,28 +1033,16 @@
             if(container) {
                 container.innerHTML = "";
                 (appConfig.parceiros || []).forEach((p, idx) => {
-                    container.innerHTML += `
-                        <div class="partner-horizontal-item-wrapper">
-                            <a href="javascript:void(0)" onclick="abrirModalLojistaCarrinho(${idx})" class="partner-horizontal-item">
-                                <img src="${p.img}" alt="${p.name}" class="partner-logo-clickable">
-                                <span class="partner-label-name">${p.name}</span>
-                            </a>
-                            <div class="btn-share-partner" onclick="compartilharLojistaIndividual('${p.name}', '${p.url}')"><i class="fas fa-share-alt"></i></div>
-                        </div>`;
+                    container.innerHTML += `<div class="partner-horizontal-item-wrapper"><a href="javascript:void(0)" onclick="abrirModalLojistaCarrinho(${idx})" class="partner-horizontal-item"><img src="${p.img}" alt="${p.name}" class="partner-logo-clickable"><span class="partner-label-name">${p.name}</span></a><div class="btn-share-partner" onclick="compartilharLojistaIndividual('${p.name}', '${p.url}')"><i class="fas fa-share-alt"></i></div></div>`;
                 });
             }
             renderizarCamerasFronte();
         }
 
         function renderizarBannersNaTelaMudarQuadro() {
-            const bannerZone = document.getElementById('main-banners-carousel-zone');
-            if(!bannerZone) return;
-            bannerZone.innerHTML = "";
+            const bannerZone = document.getElementById('main-banners-carousel-zone'); if(!bannerZone) return; bannerZone.innerHTML = "";
             const lista = appConfig.bannersList || [];
-            if(lista.length === 0) {
-                bannerZone.innerHTML = `<img src="https://via.placeholder.com/380x140?text=R1AMOBI+Publicidade" class="banner-amobi active">`;
-                return;
-            }
+            if(lista.length === 0) { bannerZone.innerHTML = `<img src="https://via.placeholder.com/380x140?text=R1AMOBI+Publicidade" class="banner-amobi active">`; return; }
             lista.forEach((bannerObj, idx) => {
                 const imgUrl = bannerObj.url || ""; const linkUrl = bannerObj.link || ""; const cliqueAtivo = linkUrl ? `onclick="window.open('${linkUrl}', '_blank')"` : '';
                 bannerZone.innerHTML += `<img src="${imgUrl}" class="banner-amobi ${idx === bannerIndexAtivoGlobal ? 'active' : ''}" ${cliqueAtivo}>`;
@@ -1018,17 +1051,13 @@
         }
 
         function navegarBannersManualmente(direcao) {
-            const imagensBannersDom = document.querySelectorAll('#main-banners-carousel-zone .banner-amobi');
-            if(imagensBannersDom.length <= 1) return;
-            imagensBannersDom[bannerIndexAtivoGlobal].classList.remove('active');
-            bannerIndexAtivoGlobal = (bannerIndexAtivoGlobal + direcao + imagensBannersDom.length) % imagensBannersDom.length;
-            imagensBannersDom[bannerIndexAtivoGlobal].classList.add('active');
+            const imagensBannersDom = document.querySelectorAll('#main-banners-carousel-zone .banner-amobi'); if(imagensBannersDom.length <= 1) return;
+            imagensBannersDom[bannerIndexAtivoGlobal].classList.remove('active'); bannerIndexAtivoGlobal = (bannerIndexAtivoGlobal + direcao + imagensBannersDom.length) % imagensBannersDom.length; imagensBannersDom[bannerIndexAtivoGlobal].classList.add('active');
             reiniciarTemporizadorAutomaticoBanners();
         }
 
         function reiniciarTemporizadorAutomaticoBanners() {
-            clearInterval(intervaloRotacaoBannersElement);
-            const imagensBannersDom = document.querySelectorAll('#main-banners-carousel-zone .banner-amobi');
+            clearInterval(intervaloRotacaoBannersElement); const imagensBannersDom = document.querySelectorAll('#main-banners-carousel-zone .banner-amobi');
             if(imagensBannersDom.length > 1) {
                 intervaloRotacaoBannersElement = setInterval(() => {
                     if(imagensBannersDom[bannerIndexAtivoGlobal]) imagensBannersDom[bannerIndexAtivoGlobal].classList.remove('active');
@@ -1068,42 +1097,27 @@
 
         function abrirPainelAdmin() {
             document.getElementById('adm-text-r1').value = appConfig.textR1 || "R1"; document.getElementById('adm-text-amobi').value = appConfig.textAmobi || "AMOBI"; document.getElementById('adm-text-footer').value = appConfig.textFooter || "MC Studio ⚡"; document.getElementById('adm-color-r1').value = appConfig.colorR1 || '#ff0000'; document.getElementById('adm-color-part').value = appConfig.colorPartners || '#00ffaa'; document.getElementById('adm-img-logo').value = appConfig.imgLogo || ''; document.getElementById('adm-bg-style').value = appConfig.bgStyle || "asfalto";
-            document.getElementById('adm-publi-status').value = appConfig.publiStatus || "invisivel"; document.getElementById('adm-publi-img').value = appConfig.publiImg || ""; document.getElementById('adm-publi-link').value = appConfig.publiLink || "";
-            alimentarSeletorLojasNoAdmin(); renderizerListaDeRemocaoBanners(); renderizerListaDeRemocaoParceiros(); renderizerListaDeRemocaoBotoes(); renderizarListaCamerasAdmin();
+            document.getElementById('adm-publi-status').value = appConfig.publiStatus || "invisivel";
+            document.getElementById('adm-publi-type').value = appConfig.publiType || "imagem";
+            document.getElementById('adm-publi-img').value = appConfig.publiImg || "";
+            document.getElementById('adm-publi-video').value = appConfig.publiVideo || "";
+            document.getElementById('adm-publi-link').value = appConfig.publiLink || "";
+            alternarCamposMidiaAdmin(); alimentarSeletorLojasNoAdmin(); renderizerListaDeRemocaoBanners(); renderizerListaDeRemocaoParceiros(); renderizerListaDeRemocaoBotoes(); renderizarListaCamerasAdmin();
             document.getElementById('modal-panel-admin').style.display = 'flex';
         }
         function fecharPainelAdmin() { document.getElementById('modal-panel-admin').style.display = 'none'; }
 
         function reordenarItemListaConfig(tipo, index, direcao) {
-            let listaTarget = [];
-            if(tipo === 'banners') listaTarget = appConfig.bannersList;
-            else if(tipo === 'botoes') listaTarget = appConfig.botoesManuais;
-            else if(tipo === 'parceiros') listaTarget = appConfig.parceiros;
-            
-            let novoIndex = index + direcao;
-            if(novoIndex < 0 || novoIndex >= listaTarget.length) return;
-            
-            let itemTemporario = listaTarget[index];
-            listaTarget[index] = listaTarget[novoIndex];
-            listaTarget[novoIndex] = itemTemporario;
-            
-            if(tipo === 'banners') renderizerListaDeRemocaoBanners();
-            else if(tipo === 'botoes') renderizerListaDeRemocaoBotoes();
-            else if(tipo === 'parceiros') renderizerListaDeRemocaoParceiros();
+            let listaTarget = []; if(tipo === 'banners') listaTarget = appConfig.bannersList; else if(tipo === 'botoes') listaTarget = appConfig.botoesManuais; else if(tipo === 'parceiros') listaTarget = appConfig.parceiros;
+            let novoIndex = index + direcao; if(novoIndex < 0 || novoIndex >= listaTarget.length) return;
+            let itemTemporario = listaTarget[index]; listaTarget[index] = listaTarget[novoIndex]; listaTarget[novoIndex] = itemTemporario;
+            if(tipo === 'banners') renderizerListaDeRemocaoBanners(); else if(tipo === 'botoes') renderizerListaDeRemocaoBotoes(); else if(tipo === 'parceiros') renderizerListaDeRemocaoParceiros();
         }
 
         function renderizerListaDeRemocaoBanners() {
             const zone = document.getElementById('admin-banners-list-zone'); zone.innerHTML = "";
             appConfig.bannersList.forEach((b, idx) => {
-                zone.innerHTML += `
-                    <div class="admin-partner-row" style="padding:10px;">
-                        <span>Banner #${idx+1}</span>
-                        <div class="admin-order-controls">
-                            <button class="btn-order-move" onclick="reordenarItemListaConfig('banners', ${idx}, -1)">▲</button>
-                            <button class="btn-order-move" onclick="reordenarItemListaConfig('banners', ${idx}, 1)">▼</button>
-                            <button class="btn-remove-partner" onclick="deletarBannerMemoria(${idx})">Remover</button>
-                        </div>
-                    </div>`;
+                zone.innerHTML += `<div class="admin-partner-row" style="padding:10px;"><span>Banner #${idx+1}</span><div class="admin-order-controls"><button class="btn-order-move" onclick="reordenarItemListaConfig('banners', ${idx}, -1)">▲</button><button class="btn-order-move" onclick="reordenarItemListaConfig('banners', ${idx}, 1)">▼</button><button class="btn-remove-partner" onclick="deletarBannerMemoria(${idx})">Remover</button></div></div>`;
             });
         }
         function salvarNovoBannerMemoria() { const url = document.getElementById('banner-new-url').value.trim(); const link = document.getElementById('banner-new-link').value.trim(); if(!url) return; appConfig.bannersList.push({ url, link }); document.getElementById('banner-new-url').value = ""; renderizerListaDeRemocaoBanners(); }
@@ -1112,15 +1126,7 @@
         function renderizerListaDeRemocaoBotoes() {
             const zone = document.getElementById('admin-buttons-list-zone'); zone.innerHTML = "";
             (appConfig.botoesManuais || []).forEach((b, idx) => {
-                zone.innerHTML += `
-                    <div class="admin-partner-row" style="padding:10px;">
-                        <span style="color:${b.color}">${b.text}</span>
-                        <div class="admin-order-controls">
-                            <button class="btn-order-move" onclick="reordenarItemListaConfig('botoes', ${idx}, -1)">▲</button>
-                            <button class="btn-order-move" onclick="reordenarItemListaConfig('botoes', ${idx}, 1)">▼</button>
-                            <button class="btn-remove-partner" onclick="deletarBotaoManualMemoria(${idx})">Remover</button>
-                        </div>
-                    </div>`;
+                zone.innerHTML += `<div class="admin-partner-row" style="padding:10px;"><span style="color:${b.color}">${b.text}</span><div class="admin-order-controls"><button class="btn-order-move" onclick="reordenarItemListaConfig('botoes', ${idx}, -1)">▲</button><button class="btn-order-move" onclick="reordenarItemListaConfig('botoes', ${idx}, 1)">▼</button><button class="btn-remove-partner" onclick="deletarBotaoManualMemoria(${idx})">Remover</button></div></div>`;
             });
         }
         function salvarNovoBotaoManual() { const text = document.getElementById('btn-new-text').value.trim(); const url = document.getElementById('btn-new-url').value.trim(); const color = document.getElementById('btn-new-color').value; if(!text || !url) return; appConfig.botoesManuais.push({ text, url, color }); document.getElementById('btn-new-text').value = ""; document.getElementById('btn-new-url').value = ""; renderizerListaDeRemocaoBotoes(); }
@@ -1129,15 +1135,7 @@
         function renderizerListaDeRemocaoParceiros() {
             const zone = document.getElementById('admin-partners-list-zone'); zone.innerHTML = "";
             appConfig.parceiros.forEach((p, idx) => {
-                zone.innerHTML += `
-                    <div class="admin-partner-row" style="padding:10px;">
-                        <span>${p.name}</span>
-                        <div class="admin-order-controls">
-                            <button class="btn-order-move" onclick="reordenarItemListaConfig('parceiros', ${idx}, -1)">▲</button>
-                            <button class="btn-order-move" onclick="reordenarItemListaConfig('parceiros', ${idx}, 1)">▼</button>
-                            <button class="btn-remove-partner" onclick="deletarParceiroMemoria(${idx})">Remover</button>
-                        </div>
-                    </div>`;
+                zone.innerHTML += `<div class="admin-partner-row" style="padding:10px;"><span>${p.name}</span><div class="admin-order-controls"><button class="btn-order-move" onclick="reordenarItemListaConfig('parceiros', ${idx}, -1)">▲</button><button class="btn-order-move" onclick="reordenarItemListaConfig('parceiros', ${idx}, 1)">▼</button><button class="btn-remove-partner" onclick="deletarParceiroMemoria(${idx})">Remover</button></div></div>`;
             });
         }
         function salvarNovoParceiro() { const name = document.getElementById('part-new-name').value.trim(); const img = document.getElementById('part-new-img').value.trim(); const url = document.getElementById('part-new-link').value.trim(); const type = document.getElementById('part-new-type').value; if(!name || !img || !url) return; appConfig.parceiros.push({ name, img, url, type }); document.getElementById('part-new-name').value = ""; document.getElementById('part-new-img').value = ""; document.getElementById('part-new-link').value = ""; renderizerListaDeRemocaoParceiros(); alimentarSeletorLojasNoAdmin(); }
@@ -1192,6 +1190,7 @@
             window.open(`https://wa.me/5518998165086?text=${encodeURIComponent(textoZap)}`, '_blank');
         }
 
+        function renderizarBaseLojistas() {}
         function renderizarCamerasFronte() {
             const container = document.getElementById('dinamic-cameras-container'); if(!container) return; container.innerHTML = '';
             const lista = appConfig.listaCamerasLocais || [];
@@ -1223,25 +1222,15 @@
             appConfig.listaCamerasLocais.push({ cidade: city, url: url, status: 'visivel' });
             document.getElementById('cam-new-city').value = ''; document.getElementById('cam-new-url').value = ''; renderizarCamerasFronte();
         }
-        function alternarStatusCameraAdmin(idx) { 
-            if(appConfig.listaCamerasLocais[idx]) {
-                appConfig.listaCamerasLocais[idx].status = appConfig.listaCamerasLocais[idx].status === 'visivel' ? 'pausado' : 'visivel';
-                renderizarCamerasFronte();
-            }
-        }
-        function deletarCameraAdmin(idx) { 
-            if(appConfig.listaCamerasLocais) {
-                appConfig.listaCamerasLocais.splice(idx, 1);
-                renderizarCamerasFronte();
-            }
-        }
+        function alternarStatusCameraAdmin(idx) { if(appConfig.listaCamerasLocais[idx]) { appConfig.listaCamerasLocais[idx].status = appConfig.listaCamerasLocais[idx].status === 'visivel' ? 'pausado' : 'visivel'; renderizarCamerasFronte(); } }
+        function deletarCameraAdmin(idx) { if(appConfig.listaCamerasLocais) { appConfig.listaCamerasLocais.splice(idx, 1); renderizarCamerasFronte(); } }
 
         function aplicarEGravarTudo() {
             try {
-                appConfig.textR1 = document.getElementById('adm-text-r1').value.trim(); appConfig.textAmobi = document.getElementById('adm-text-amobi').value.trim(); appConfig.textFooter = document.getElementById('adm-text-footer').value.trim(); appConfig.colorR1 = document.getElementById('adm-color-r1').value; appConfig.colorPartners = document.getElementById('adm-color-part').value; appConfig.bgStyle = document.getElementById('adm-bg-style').value; appConfig.imgLogo = document.getElementById('adm-img-logo').value.trim(); appConfig.publiStatus = document.getElementById('adm-publi-status').value; appConfig.publiImg = document.getElementById('adm-publi-img').value.trim(); appConfig.publiLink = document.getElementById('adm-publi-link').value.trim();
-                localStorage.setItem('R1_APP_DYNAMIC_CONFIG', JSON.stringify(appConfig));
-                databaseR1.ref('R1_APP_DYNAMIC_CONFIG').set(appConfig);
-                fecharPainelAdmin(); inicializarConfiguracoesDinamicas(); alert("Configurações e Câmeras salvas com sucesso na Nuvem!");
+                appConfig.textR1 = document.getElementById('adm-text-r1').value.trim(); appConfig.textAmobi = document.getElementById('adm-text-amobi').value.trim(); appConfig.textFooter = document.getElementById('adm-text-footer').value.trim(); appConfig.colorR1 = document.getElementById('adm-color-r1').value; appConfig.colorPartners = document.getElementById('adm-color-part').value; appConfig.bgStyle = document.getElementById('adm-bg-style').value; appConfig.imgLogo = document.getElementById('adm-img-logo').value.trim(); appConfig.publiStatus = document.getElementById('adm-publi-status').value;
+                appConfig.publiType = document.getElementById('adm-publi-type').value; appConfig.publiImg = document.getElementById('adm-publi-img').value.trim(); appConfig.publiVideo = document.getElementById('adm-publi-video').value.trim(); appConfig.publiLink = document.getElementById('adm-publi-link').value.trim();
+                localStorage.setItem('R1_APP_DYNAMIC_CONFIG', JSON.stringify(appConfig)); databaseR1.ref('R1_APP_DYNAMIC_CONFIG').set(appConfig);
+                fecharPainelAdmin(); inicializarConfiguracoesDinamicas(); alert("Configurações e Mídias salvas na Nuvem!");
             } catch (err) { alert("Erro ao salvar: " + err.message); }
         }
 
@@ -1258,16 +1247,7 @@
         function fecharModalStoreFront() { document.getElementById('modal-store-front').style.display = 'none'; }
         function compartilharAppGeral() { alert('Compartilhando link do app R1AMOBI...'); }
         function acionarInstalacaoPWA() { alert('Instalando aplicativo...'); }
-        
-        function compartilharLojistaIndividual(name, phone) { 
-            const msg = `Confira a loja de *${name}* no R1AMOBI App! Peça online direto pelo catálogo do WhatsApp: https://wa.me/${phone}`; 
-            if(navigator.share) { 
-                navigator.share({ title: `Parceiro R1AMOBI - ${name}`, text: msg, url: location.href }).catch(() => {}); 
-            } else { 
-                alert(msg); 
-            } 
-        }
-
+        function compartilharLojistaIndividual(name, phone) { const msg = `Confira a loja de *${name}* no R1AMOBI App! Peça online direto pelo catálogo: https://wa.me/${phone}`; if(navigator.share) { navigator.share({ title: `Parceiro R1AMOBI - ${name}`, text: msg, url: location.href }).catch(() => {}); } else { alert(msg); } }
         window.addEventListener('load', () => { carregarClimaEData(); });
         let currentItem = 0; setInterval(() => { const items = document.querySelectorAll('.carousel-item'); if(items.length) { items[currentItem].classList.remove('active'); currentItem = (currentItem + 1) % items.length; items[currentItem].classList.add('active'); } }, 3000);
         window.addEventListener('resize', () => { gerenciarSistemaDeFundoAtivo(); });
